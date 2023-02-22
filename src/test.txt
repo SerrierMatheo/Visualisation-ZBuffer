@@ -1,0 +1,8 @@
+Hello
+je suis
+un fichier
+de test
+pas tres interessant
+mais franchement
+tres utile
+;

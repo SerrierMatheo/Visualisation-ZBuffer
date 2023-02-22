@@ -1,0 +1,14 @@
+//
+// Created by serma on 22/02/2023.
+//
+
+#ifndef VISUALISATION_ZBUFFER_LECTURE_H
+#define VISUALISATION_ZBUFFER_LECTURE_H
+
+
+class Lecture {
+
+};
+
+
+#endif //VISUALISATION_ZBUFFER_LECTURE_H

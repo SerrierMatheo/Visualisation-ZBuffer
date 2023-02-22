@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Visualisation_ZBuffer.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\Visualisation_ZBuffer.dir/objects.a @CMakeFiles\Visualisation_ZBuffer.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Visualisation_ZBuffer.dir/objects.a -Wl,--no-whole-archive -o Visualisation_ZBuffer.exe -Wl,--out-implib,libVisualisation_ZBuffer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Visualisation_ZBuffer.dir\linklibs.rsp
