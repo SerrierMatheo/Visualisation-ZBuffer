@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Object3D
+class PlyObject3D
+class Vertex
+class Face
+abstract class Lecture
+class LecturePly
+
+Object3D <|-- PlyObject3D
+Object3D "0..*"<--"1" Vertex : v
+Object3D "0..*"<--"1" Face : f
+Lecture <|-- LecturePly
+
+@enduml

@@ -39,8 +39,8 @@ int main() {
         vFace.push_back(face);
     }
 
-    /**PlyObject3D plyObject3D(vVert, vFace);
-    std::string resC = plyObject3D.afficherInfo(0);
+    PlyObject3D plyObject3D(vVert, vFace);
+    /**std::string resC = plyObject3D.afficherInfo(0);
     std::cout << "Infomation de l'objet : format court \n" + resC + "\n" << std::endl;
     std::string resL = plyObject3D.afficherInfo(1);
     std::cout << "Infomation de l'objet : format long \n" + resL + "\n" << std::endl;
@@ -50,12 +50,12 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
+    //TODO 
     ifstream file("../../Ressources/test.ply", ios::in);
     std::string s = "";
 
     if(file)
     {
-        //TODO instructions
         string ligne;
         printf("Ligne pas ligne\n");
         while(getline(file, ligne))
