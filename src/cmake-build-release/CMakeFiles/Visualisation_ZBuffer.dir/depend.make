@@ -4,13 +4,16 @@
 CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.obj: \
  ../Face.cpp \
  ../Face.h
-CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj: \
- ../Lecture.cpp \
- ../Lecture.h
 CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.obj: \
  ../Face.h \
  ../PlyObject3D.cpp \
  ../PlyObject3D.h \
+ ../Vertex.h
+CMakeFiles/Visualisation_ZBuffer.dir/ReadPlyFile.cpp.obj: \
+ ../Face.h \
+ ../PlyObject3D.h \
+ ../ReadPlyFile.cpp \
+ ../ReadPlyFile.h \
  ../Vertex.h
 CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj: \
  ../Vertex.cpp \
@@ -18,5 +21,6 @@ CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj: \
 CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.obj: \
  ../Face.h \
  ../PlyObject3D.h \
+ ../ReadPlyFile.h \
  ../Vertex.h \
  ../main.cpp

@@ -88,10 +88,13 @@
 		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Face.h">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>
-		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Lecture.cpp">
+		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Lecture.h">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>
-		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Lecture.h">
+		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/LecturePly.cpp">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/LecturePly.h">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>
 		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/PlyObject3D.cpp">

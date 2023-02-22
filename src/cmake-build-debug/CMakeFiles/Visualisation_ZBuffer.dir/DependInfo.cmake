@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Face.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.obj"
-  "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Lecture.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj"
+  "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/LecturePly.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj"
   "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/PlyObject3D.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.obj"
   "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Vertex.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj"
   "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/main.cpp" "C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.obj"

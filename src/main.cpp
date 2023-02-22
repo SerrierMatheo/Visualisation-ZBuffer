@@ -3,14 +3,17 @@
 #include "Face.h"
 #include "PlyObject3D.h"
 #include "fstream"
+#include "ReadPlyFile.h"
 
 using namespace V;
 using namespace F;
 using namespace O;
+using namespace Lply;
 using namespace std;
 
 int main() {
-    Vertex v(10,15,20);
+
+    /**Vertex v(10,15,20);
     //std::cout << "Infomation du vertex v "<< std::endl;
     //v.afficherInfo();
 
@@ -40,7 +43,7 @@ int main() {
     }
 
     PlyObject3D plyObject3D(vVert, vFace);
-    /**std::string resC = plyObject3D.afficherInfo(0);
+    std::string resC = plyObject3D.afficherInfo(0);
     std::cout << "Infomation de l'objet : format court \n" + resC + "\n" << std::endl;
     std::string resL = plyObject3D.afficherInfo(1);
     std::cout << "Infomation de l'objet : format long \n" + resL + "\n" << std::endl;
@@ -50,36 +53,7 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
-    //TODO 
-    ifstream file("../../Ressources/test.ply", ios::in);
-    std::string s = "";
+    PlyObject3D obj = ReadPlyFile::ReadFile("test.ply");
 
-    if(file)
-    {
-        string ligne;
-        printf("Ligne pas ligne\n");
-        while(getline(file, ligne))
-            s += ligne + " \n";
-        printf("mot par mot\n");
-        file.clear();
-        file.seekg(0, ios::beg);
-        string mot;
-        while(file >> mot)
-            cout << mot << endl;
-        printf("caractere par caractere\n");
-        file.clear();
-        file.seekg(0, ios::beg);
-        char c;
-        while(file.get(c))
-        {
-            cout << c << endl;
-            int pos = file.tellg();
-        }
-        file.close();
-    }
-    else
-        cout << "Impossible d'ouvrir le fichier !" << endl;
-
-    std::cout << s << std::endl;
     return 0;
 }

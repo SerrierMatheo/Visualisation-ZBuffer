@@ -13,6 +13,15 @@ using namespace O;
 const int COURT = 0;
 const int LONG = 1;
 
+O::PlyObject3D::PlyObject3D() {
+    vector<V::Vertex> vert;
+    v = vert;
+    colV = false;
+    vector<F::Face> face;
+    f = face;
+    colF = false;
+}
+
 O::PlyObject3D::PlyObject3D(std::vector<V::Vertex> v, std::vector<F::Face> f) : v(std::move(v)), f(std::move(f)) {
 }
 

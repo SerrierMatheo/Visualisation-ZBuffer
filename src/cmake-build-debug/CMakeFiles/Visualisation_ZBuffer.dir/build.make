@@ -117,18 +117,18 @@ CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\Face.cpp -o CMakeFiles\Visualisation_ZBuffer.dir\Face.cpp.s
 
-CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
-CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj: ../Lecture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Visualisation_ZBuffer.dir\Lecture.cpp.obj -c C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\Lecture.cpp
+CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
+CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj: ../LecturePly.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Visualisation_ZBuffer.dir\LecturePly.cpp.obj -c C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\LecturePly.cpp
 
-CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\Lecture.cpp > CMakeFiles\Visualisation_ZBuffer.dir\Lecture.cpp.i
+CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\LecturePly.cpp > CMakeFiles\Visualisation_ZBuffer.dir\LecturePly.cpp.i
 
-CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\Lecture.cpp -o CMakeFiles\Visualisation_ZBuffer.dir\Lecture.cpp.s
+CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src\LecturePly.cpp -o CMakeFiles\Visualisation_ZBuffer.dir\LecturePly.cpp.s
 
 # Object files for target Visualisation_ZBuffer
 Visualisation_ZBuffer_OBJECTS = \
@@ -136,7 +136,7 @@ Visualisation_ZBuffer_OBJECTS = \
 "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.obj" \
 "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj" \
 "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.obj" \
-"CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj"
+"CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj"
 
 # External object files for target Visualisation_ZBuffer
 Visualisation_ZBuffer_EXTERNAL_OBJECTS =
@@ -145,7 +145,7 @@ Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.obj
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.obj
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.obj
-Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/Lecture.cpp.obj
+Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/build.make
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/linklibs.rsp
 Visualisation_ZBuffer.exe: CMakeFiles/Visualisation_ZBuffer.dir/objects1.rsp
