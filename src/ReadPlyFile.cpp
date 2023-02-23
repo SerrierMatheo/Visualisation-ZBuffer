@@ -6,7 +6,7 @@
 #include <sstream>
 #include "ReadPlyFile.h"
 
-PlyObject3D Lply::ReadPlyFile::ReadFile(string file) {
+/**PlyObject3D Lply::ReadPlyFile::ReadFile(string file) {
     PlyObject3D obj;
     string filePath = "../../Ressources/" + file;
     ifstream flow(filePath, ios::in);
@@ -61,4 +61,4 @@ PlyObject3D Lply::ReadPlyFile::ReadFile(string file) {
     flow.close();
     return obj;
 
-}
+}*/

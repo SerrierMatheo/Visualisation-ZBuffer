@@ -81,6 +81,22 @@ namespace V
 
         void setZ(double z);
 
+        unsigned char getR() const;
+
+        void setR(unsigned char r);
+
+        unsigned char getG() const;
+
+        void setG(unsigned char g);
+
+        unsigned char getB() const;
+
+        void setB(unsigned char b);
+
+        unsigned char getA() const;
+
+        void setA(unsigned char a);
+
         /**
          * permet d'afficher les informations d'une classe
          * valeur stocker dans les attributs

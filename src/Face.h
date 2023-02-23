@@ -20,48 +20,15 @@ namespace F
      */
     class Face {
     public:
-        /**
-         * Constructeur par défaut
-         */
-        Face(){
-            id = {};
-            r = 0;
-            g = 0;
-            b = 0;
-            a = 0;
-        }
 
-        /**
-         * Constructeur paramétré
-         * @param id
-         */
-        explicit Face(std::vector<int> vect) {
-            id = std::move(vect);
-            r = 0;
-            g = 0;
-            b = 0;
-            a = 0;
-        }
+        Face();
 
-        /**
-         * Constrcuteur paramétré
-         * @param vect
-         * @param R
-         * @param G
-         * @param B
-         * @param A
-         */
-        Face(std::vector<int> vect, unsigned char R, unsigned char G, unsigned char B, unsigned char A){
-            id = std::move(vect);
-            r = R;
-            g = G;
-            b = B;
-            a = A;
-        }
+        Face(const std::vector<int> &index);
 
-        const std::vector<int> &getId() const;
 
-        void setId(const std::vector<int> &ID);
+        const std::vector<int> &getIndex() const;
+
+        void setIndex(const std::vector<int> &ID);
 
         unsigned char getR() const;
 
@@ -81,8 +48,10 @@ namespace F
 
         std::string afficherInfo() const;
 
+        void addVertexIndex(int vertex_index);
+
     private:
-        std::vector<int> id;
+        std::vector<int> index;
         unsigned char r;
         unsigned char g;
         unsigned char b;

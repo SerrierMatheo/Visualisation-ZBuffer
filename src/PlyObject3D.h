@@ -21,13 +21,15 @@ namespace O
     public:
         PlyObject3D();
 
-        PlyObject3D(std::vector<V::Vertex> v, std::vector<F::Face> f);
+        PlyObject3D(std::string filename);
 
-        PlyObject3D(std::vector<V::Vertex> v, bool colV, std::vector<F::Face> f, bool colF);
+        //PlyObject3D(std::vector<V::Vertex> v, std::vector<F::Face> f);
+
+        //PlyObject3D(std::vector<V::Vertex> v, bool colV, std::vector<F::Face> f, bool colF);
 
         std::string afficherInfo(int size) const;
 
-        std::vector<V::Vertex> &getV() const;
+        const std::vector<V::Vertex> & getV() const;
 
         void setV(const std::vector<V::Vertex> &vert);
 
@@ -35,7 +37,7 @@ namespace O
 
         void setColV(bool cV);
 
-        std::vector<F::Face> &getF() const;
+        const std::vector<F::Face> & getF() const;
 
         void setF(const std::vector<F::Face> &face);
 
@@ -45,9 +47,9 @@ namespace O
 
     private:
         std::vector <V::Vertex> v;
-        bool colV{};
+        bool colV;
         std::vector <F::Face> f;
-        bool colF{};
+        bool colF;
     };
 }
 

@@ -53,7 +53,7 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
-    PlyObject3D obj = ReadPlyFile::ReadFile("test.ply");
-
+    PlyObject3D obj("Al.ply");
+    std::cout << obj.afficherInfo(1) << std::endl;
     return 0;
 }

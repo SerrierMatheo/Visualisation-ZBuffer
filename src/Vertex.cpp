@@ -39,3 +39,35 @@ string Vertex::afficherInfo() const{
     info += "Valeur RGBA : (" + std::to_string(this->r) + "," + std::to_string(this->g) + "," + std::to_string(this->b) + "," + std::to_string(this->a) + ")\n";
     return info;
 }
+
+unsigned char Vertex::getR() const {
+    return r;
+}
+
+void Vertex::setR(unsigned char r) {
+    Vertex::r = r;
+}
+
+unsigned char Vertex::getG() const {
+    return g;
+}
+
+void Vertex::setG(unsigned char g) {
+    Vertex::g = g;
+}
+
+unsigned char Vertex::getB() const {
+    return b;
+}
+
+void Vertex::setB(unsigned char b) {
+    Vertex::b = b;
+}
+
+unsigned char Vertex::getA() const {
+    return a;
+}
+
+void Vertex::setA(unsigned char a) {
+    Vertex::a = a;
+}
