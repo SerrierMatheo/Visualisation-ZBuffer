@@ -53,8 +53,8 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
-    PlyObject3D obj("kerolamp.ply");
+    PlyObject3D obj("airplane.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
-    obj.createFile("kerolamp2.ply");
+    //obj.createFile("kerolamp2.ply");
     return 0;
 }

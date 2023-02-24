@@ -11,13 +11,6 @@
 
 namespace F
 {
-    /**
-     * Classe face
-     * définie le concept de face
-     * constitué d'un ensemble de vertex (vector) et d'attribut correspondant à la colorisation
-     * id de type vector <int> -> ensemble des sommets de la face
-     * r,g,b,a correspondant au valeur RGBA de la face
-     */
     class Face {
     public:
 

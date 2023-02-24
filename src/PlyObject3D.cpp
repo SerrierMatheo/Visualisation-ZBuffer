@@ -6,6 +6,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <cmath>
 #include "iostream" //
 
 using namespace std;
@@ -21,6 +22,7 @@ O::PlyObject3D::PlyObject3D() {
     vector<F::Face> face;
     f = face;
     colF = false;
+    vector<V::Vertex> norm;
 }
 
 /**
@@ -142,7 +144,7 @@ PlyObject3D::PlyObject3D(std::string filename) {
         }
         f.push_back(face);
     }
-
+    computeFaceNormals();
     file.close();
 }
 
@@ -158,6 +160,7 @@ string PlyObject3D::afficherInfo(int size) const{
             info += "Couleur : " + std::to_string(this->isColV()) + "\n";
             info += "nombre de faces : " + std::to_string(this->f.size()) + "\n";
             info += "Couleur : " + std::to_string(this->isColF()) + "\n";
+            info += "nombre de normales : " + std::to_string(this->n.size()) + "\n";
             break;
         case (LONG):
             //affichage complet
@@ -174,6 +177,10 @@ string PlyObject3D::afficherInfo(int size) const{
             info += "liste des faces : \n";
             for (int i = 0; i < this->f.size(); ++i) {
                 info += this->getF()[i].afficherInfo() + "\n";
+            }
+            info += "nombre de normales : " + std::to_string(this->n.size()) + "\n";
+            for (const auto & i : this->n) {
+                info += i.afficherInfo() + "\n";
             }
             break;
         default:
@@ -260,12 +267,9 @@ void PlyObject3D::createFile(string fileName) {
         file << std::endl;
     }
 
-    //std::cout << this->f.size() << std::endl;
-
     for (const F::Face& face : this->f) {
         file << face.getIndex().size() << " ";
 
-        //TODO erreur probalement du au parcours du vector
         for (int idx : face.getIndex()) {
             file << idx << " ";
         }
@@ -277,6 +281,69 @@ void PlyObject3D::createFile(string fileName) {
     }
     file.close();
 }
+
+//calcul de produit vectoriel
+V::Vertex PlyObject3D::cross(V::Vertex v1, V::Vertex v2) {
+    V::Vertex result;
+    result.setX(v1.getY()*v2.getZ() - v1.getZ()*v2.getY());
+    result.setY(v1.getZ()*v2.getX() - v1.getX()*v2.getZ());
+    result.setZ(v1.getX()*v2.getY() - v1.getY()*v2.getX());
+    return result;
+}
+
+//normalise la normale obtenue grâce au produit vectoriel des representant de la face
+V::Vertex PlyObject3D::normalize(V::Vertex w) {
+    double norm = sqrt(w.getX()*w.getX() + w.getY()*w.getY() + w.getZ()*w.getZ());
+
+    w.setX(w.getX() / norm);
+    w.setY(w.getY() / norm);
+    w.setZ(w.getZ() / norm);
+}
+
+//Pour chaque face de l'instance, calcul et normalise la normale et l'ajoute dans le vector<Vertex> n
+void PlyObject3D::computeFaceNormals() {
+
+    for (int i = 0; i < f.size(); ++i) {
+        if(f[i].getIndex().size() > 3){
+            throw std::runtime_error("Nombre de face != 3");
+        }
+        V::Vertex u;
+        V::Vertex v;
+        //calculer u et v
+        V::Vertex A = this->v[this->f[i].getIndex()[0]];
+        //std::cout << A.afficherInfo() << std::endl;
+        V::Vertex B = this->v[this->f[i].getIndex()[1]];
+        //std::cout << B.afficherInfo() << std::endl;
+        V::Vertex C = this->v[this->f[i].getIndex()[2]];
+        //std::cout << C.afficherInfo() << std::endl;
+
+        u.setX(B.getX()-A.getX());
+        u.setY(B.getY()-A.getY());
+        u.setZ(B.getZ()-A.getZ());
+        std::cout << u.afficherInfo() << std::endl;
+
+        v.setX(C.getX()-A.getX());
+        v.setY(C.getY()-A.getY());
+        v.setZ(C.getZ()-A.getZ());
+        std::cout << v.afficherInfo() << std::endl;
+
+        V::Vertex w = cross(u,v);
+        w = normalize(w);
+        w.setA(0);
+        w.setB(0);
+        w.setR(0);
+        w.setG(0);
+        this->n.push_back(w);
+    }
+}
+
+
+
+
+
+
+
+
 
 
 

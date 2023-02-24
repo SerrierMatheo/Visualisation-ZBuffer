@@ -43,11 +43,19 @@ namespace O
 
         void setColF(bool cF);
 
+        V::Vertex cross(V::Vertex v1, V::Vertex v2);
+
+        V::Vertex normalize(V::Vertex w);
+
+        void computeFaceNormals();
+
     private:
         std::vector <V::Vertex> v;
         bool colV;
         std::vector <F::Face> f;
         bool colF;
+        //correspond à la liste des normales calculer
+        std::vector <V::Vertex> n;
     };
 }
 
