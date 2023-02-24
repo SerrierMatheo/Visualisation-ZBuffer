@@ -34,9 +34,11 @@ PlyObject3D::PlyObject3D(std::string filename) {
         throw std::runtime_error("Unable to open file");
     }
 
-    std::string  line;
+    std::string line;
     int vertexCount = 0;
     int faceCount = 0;
+    bool inVertexBlock = false;
+    bool inFaceBlock = false;
     colF = false;
     colV = false;
 
@@ -45,20 +47,24 @@ PlyObject3D::PlyObject3D(std::string filename) {
         // Nombre de sommets
         if (line.find("element vertex") != std::string::npos) {
             vertexCount = std::stoi(line.substr(15));
+            inVertexBlock = true;
+            inFaceBlock = false;
+        }
+
+        // Si la ligne contient "property uchar red", alors l'objet a une couleur de vertex
+        if (inVertexBlock && line.find("property uchar red") != std::string::npos) {
+            colV = true;
         }
 
         // Nombre de faces
         if (line.find("element face") != std::string::npos) {
             faceCount = std::stoi(line.substr(13));
+            inFaceBlock = true;
+            inVertexBlock = false;
         }
 
-        // Si la ligne contient "property uchar red", alors l'objet a une couleur de vertex
-        if (line.find("property uchar red") != std::string::npos) {
-            colV = true;
-        }
-
-        // Si la ligne contient "property uchar red" ou "property uchar diffuse_red", alors l'objet a une couleur de face
-        if (line.find("property uchar red") != std::string::npos || line.find("property uchar diffuse_red") != std::string::npos) {
+        // Si la ligne contient "property uchar red" , alors l'objet a une couleur de face
+        if (inFaceBlock && line.find("property uchar red") != std::string::npos) {
             colF = true;
         }
 
@@ -71,109 +77,74 @@ PlyObject3D::PlyObject3D(std::string filename) {
     // Lecture des sommets
     for (int i = 0; i < vertexCount; i++) {
         V::Vertex vertex;
-        double x,y,z;
-        file >> x >> y >> z ;
+        std::string lineC;
+        std::getline(file, lineC);
+        std::stringstream ss(lineC);
+        double x, y, z;
+        ss >> x >> y >> z;
         vertex.setX(x);
         vertex.setY(y);
         vertex.setZ(z);
-
-        //this->v.push_back(vertex);
         if (colV) {
-            unsigned char r,g,b,a;
-            file >> r >> g >> b >> a;
-            vertex.setR(r);
-            vertex.setG(g);
-            vertex.setB(b);
-            vertex.setA(a);
+            unsigned int r, g, b, a;
+            ss >> r >> g >> b >> a;
+            //std::cout << r << g << b << a << std::endl;
+            auto cr = static_cast<unsigned char>(r);
+            auto cg = static_cast<unsigned char>(g);
+            auto cb = static_cast<unsigned char>(b);
+            auto ca = static_cast<unsigned char>(a);
+            vertex.setR(cr);
+            vertex.setG(cg);
+            vertex.setB(cb);
+            vertex.setA(ca);
         }
-
         v.push_back(vertex);
     }
+
 
     // Lecture des faces
     for (int i = 0; i < faceCount; i++) {
         F::Face face;
-        int vertexIndexCount;
-        file >> vertexIndexCount;
-        vector<int> index;
+        if (!colF) {
+            int vertexIndexCount;
+            file >> vertexIndexCount;
+            vector<int> index;
 
-        for (int j = 0; j < vertexIndexCount; j++) {
-            int id;
-            file >> id;
-            //std::cout << std::to_string(id) << std::endl;
-            index.push_back(id);
-        }
+            for (int j = 0; j < vertexIndexCount; j++) {
+                int id;
+                file >> id;
+                //std::cout << std::to_string(id) << std::endl;
+                index.push_back(id);
+            }
+            face.setIndex(index);
+        } else {
 
-        if (colF) {
-            unsigned char r, g, b, a;
+            int vertexIndexCount;
+            int r, g, b, a;
+            file >> vertexIndexCount;
+            vector<int> index;
+            for (int j = 0; j < vertexIndexCount; j++) {
+                int id;
+                file >> id;
+                //std::cout << std::to_string(id) << std::endl;
+                index.push_back(id);
+            }
             file >> r >> g >> b >> a;
-            face.setR(r);
-            face.setG(g);
-            face.setB(b);
-            face.setA(a);
+            auto cr = static_cast<unsigned char>(r);
+            auto cg = static_cast<unsigned char>(g);
+            auto cb = static_cast<unsigned char>(b);
+            auto ca = static_cast<unsigned char>(a);
+            face.setR(cr);
+            face.setG(cg);
+            face.setB(cb);
+            face.setA(ca);
+            face.setIndex(index);
         }
-        face.setIndex(index);
-
         f.push_back(face);
     }
 
     file.close();
-
-    /**int numVertices = 0, numFaces = 0;
-    while (getline(file,line)) {
-        if (line.find("element vertex") == 0) {
-            numVertices = stoi(line.substr(15));
-        } else if (line.find("element face") == 0) {
-            numFaces = stoi(line.substr(13));
-        } else if (line == "end_header") {
-            break;
-        }
-    }
-
-    for (int i = 0; i < numVertices; i++) {
-        double x,y,z;
-        unsigned char r,g,b,a;
-        file >> x >> y >> z >> r >> g >> b >> a;
-        V::Vertex vertex;
-        vertex.setX(x);
-        vertex.setY(y);
-        vertex.setZ(z);
-        vertex.setR(r);
-        vertex.setG(g);
-        vertex.setB(b);
-        vertex.setA(a);
-        this->v.push_back(vertex);
-    }
-
-    for (int i = 0; i < numFaces; i++){
-        int numIndices;
-        file >> numIndices;
-        F::Face face;
-        for (int j = 0; j < numIndices; j++) {
-            int index;
-            file >> index;
-            face.addVertexIndex(index);
-        }
-        unsigned char r, g, b, a;
-        file >> r >> g >> b >> a;
-        face.setR(r);
-        face.setG(g);
-        face.setB(b);
-        face.setA(a);
-
-        this->f.push_back(face);
-    }*/
 }
-
-/**O::PlyObject3D::PlyObject3D(std::vector<V::Vertex> v, std::vector<F::Face> f) : v(std::move(v)), f(std::move(f)) {
-}
-
-O::PlyObject3D::PlyObject3D(std::vector<V::Vertex> v, bool colV, std::vector<F::Face> f, bool colF) :
-    v(std::move(v)),
-    colV(colV),
-    f(std::move(f)),
-    colF(colF) {
-}*/
 
 string PlyObject3D::afficherInfo(int size) const{
 
@@ -242,6 +213,69 @@ bool O::PlyObject3D::isColF() const {
 
 void O::PlyObject3D::setColF(bool cF) {
     PlyObject3D::colF = cF;
+}
+
+void PlyObject3D::createFile(string fileName) {
+    string filePath = "../../Ressources/" + fileName;
+    ofstream file(filePath); //creation du fichier dans le repertoire
+
+    if(!file.is_open()) {
+        std::cerr << "Could not open file " << fileName << " for writing.";
+        return;
+    }
+
+    file << "ply" << std::endl;
+    file << "format ascii 1.0" << std::endl;
+    file << "comment VCGLIB generated" << std::endl;
+    file << "element vertex " << this->v.size() << std::endl;
+    file << "property float x" << std::endl;
+    file << "property float y" << std::endl;
+    file << "property float z" << std::endl;
+
+    if (this->colV) {
+        file << "property uchar red" << std::endl;
+        file << "property uchar green" << std::endl;
+        file << "property uchar blue" << std::endl;
+        file << "property uchar alpha" << std::endl;
+    }
+
+    file << "element face " << this->f.size() << std::endl;
+    file << "property list uchar int vertex_indices" << std::endl;
+
+    if(this->colF) {
+        file << "property uchar red" << std::endl;
+        file << "property uchar green" << std::endl;
+        file << "property uchar blue" << std::endl;
+        file << "property uchar alpha" << std::endl;
+    }
+
+    file << "end_header" << std::endl;
+
+    for (const V::Vertex& vertex : this->v) {
+        file << vertex.getX() << " " << vertex.getY() << " " << vertex.getZ() << " ";
+        if(this->colV) {
+            file << static_cast<int>(vertex.getR()) << " " << static_cast<int>(vertex.getG()) << " "
+            << static_cast<int>(vertex.getB()) << " " << static_cast<int>(vertex.getA());
+        }
+        file << std::endl;
+    }
+
+    //std::cout << this->f.size() << std::endl;
+
+    for (const F::Face& face : this->f) {
+        file << face.getIndex().size() << " ";
+
+        //TODO erreur probalement du au parcours du vector
+        for (int idx : face.getIndex()) {
+            file << idx << " ";
+        }
+        if (this->colF) {
+            file << static_cast<int>(face.getR()) << " " << static_cast<int>(face.getG()) << " "
+            << static_cast<int>(face.getB()) << " " << static_cast<int>(face.getA());
+        }
+        file << std::endl;
+    }
+    file.close();
 }
 
 

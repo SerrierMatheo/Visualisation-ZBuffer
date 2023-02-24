@@ -176,30 +176,6 @@ PlyObject3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.s
 .PHONY : PlyObject3D.cpp.s
 
-ReadPlyFile.obj: ReadPlyFile.cpp.obj
-.PHONY : ReadPlyFile.obj
-
-# target to build an object file
-ReadPlyFile.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/ReadPlyFile.cpp.obj
-.PHONY : ReadPlyFile.cpp.obj
-
-ReadPlyFile.i: ReadPlyFile.cpp.i
-.PHONY : ReadPlyFile.i
-
-# target to preprocess a source file
-ReadPlyFile.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/ReadPlyFile.cpp.i
-.PHONY : ReadPlyFile.cpp.i
-
-ReadPlyFile.s: ReadPlyFile.cpp.s
-.PHONY : ReadPlyFile.s
-
-# target to generate assembly for a file
-ReadPlyFile.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/ReadPlyFile.cpp.s
-.PHONY : ReadPlyFile.cpp.s
-
 Vertex.obj: Vertex.cpp.obj
 .PHONY : Vertex.obj
 
@@ -263,9 +239,6 @@ help:
 	@echo ... PlyObject3D.obj
 	@echo ... PlyObject3D.i
 	@echo ... PlyObject3D.s
-	@echo ... ReadPlyFile.obj
-	@echo ... ReadPlyFile.i
-	@echo ... ReadPlyFile.s
 	@echo ... Vertex.obj
 	@echo ... Vertex.i
 	@echo ... Vertex.s

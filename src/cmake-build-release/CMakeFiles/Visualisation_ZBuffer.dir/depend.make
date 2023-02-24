@@ -9,18 +9,11 @@ CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.obj: \
  ../PlyObject3D.cpp \
  ../PlyObject3D.h \
  ../Vertex.h
-CMakeFiles/Visualisation_ZBuffer.dir/ReadPlyFile.cpp.obj: \
- ../Face.h \
- ../PlyObject3D.h \
- ../ReadPlyFile.cpp \
- ../ReadPlyFile.h \
- ../Vertex.h
 CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.obj: \
  ../Vertex.cpp \
  ../Vertex.h
 CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.obj: \
  ../Face.h \
  ../PlyObject3D.h \
- ../ReadPlyFile.h \
  ../Vertex.h \
  ../main.cpp

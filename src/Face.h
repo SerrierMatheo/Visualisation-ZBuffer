@@ -26,7 +26,7 @@ namespace F
         Face(const std::vector<int> &index);
 
 
-        const std::vector<int> &getIndex() const;
+        const std::vector<int> getIndex() const;
 
         void setIndex(const std::vector<int> &ID);
 

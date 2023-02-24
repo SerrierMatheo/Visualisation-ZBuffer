@@ -152,30 +152,6 @@ Face.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s
 .PHONY : Face.cpp.s
 
-LecturePly.obj: LecturePly.cpp.obj
-.PHONY : LecturePly.obj
-
-# target to build an object file
-LecturePly.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.obj
-.PHONY : LecturePly.cpp.obj
-
-LecturePly.i: LecturePly.cpp.i
-.PHONY : LecturePly.i
-
-# target to preprocess a source file
-LecturePly.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.i
-.PHONY : LecturePly.cpp.i
-
-LecturePly.s: LecturePly.cpp.s
-.PHONY : LecturePly.s
-
-# target to generate assembly for a file
-LecturePly.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Visualisation_ZBuffer.dir\build.make CMakeFiles/Visualisation_ZBuffer.dir/LecturePly.cpp.s
-.PHONY : LecturePly.cpp.s
-
 PlyObject3D.obj: PlyObject3D.cpp.obj
 .PHONY : PlyObject3D.obj
 
@@ -260,9 +236,6 @@ help:
 	@echo ... Face.obj
 	@echo ... Face.i
 	@echo ... Face.s
-	@echo ... LecturePly.obj
-	@echo ... LecturePly.i
-	@echo ... LecturePly.s
 	@echo ... PlyObject3D.obj
 	@echo ... PlyObject3D.i
 	@echo ... PlyObject3D.s

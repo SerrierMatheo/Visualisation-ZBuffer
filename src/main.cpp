@@ -3,12 +3,10 @@
 #include "Face.h"
 #include "PlyObject3D.h"
 #include "fstream"
-#include "ReadPlyFile.h"
 
 using namespace V;
 using namespace F;
 using namespace O;
-using namespace Lply;
 using namespace std;
 
 int main() {
@@ -24,11 +22,13 @@ int main() {
     }
 
     Face f(vect);
-    //std::cout << "Infomation de la face f "<< std::endl;
-    //f.afficherInfo();
+    std::cout << f.getIndex().size() << std::endl;
+    for(int i = 0; i < f.getIndex().size(); i++){
+        std::cout << f.getIndex()[i] << std::endl;
+    }
 
     //--------------------------------------------------------------------------------------
-    std::vector<Vertex> vVert;
+    /**std::vector<Vertex> vVert;
     int x = 0;
     for (int i = 0; i < 40000; ++i) {
         Vertex vertex(x,x+1,x+2);
@@ -42,7 +42,7 @@ int main() {
         vFace.push_back(face);
     }
 
-    PlyObject3D plyObject3D(vVert, vFace);
+    PlyObject3D plyObject3D("pyramide.ply");
     std::string resC = plyObject3D.afficherInfo(0);
     std::cout << "Infomation de l'objet : format court \n" + resC + "\n" << std::endl;
     std::string resL = plyObject3D.afficherInfo(1);
@@ -53,7 +53,8 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
-    PlyObject3D obj("Al.ply");
+    PlyObject3D obj("kerolamp.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
+    obj.createFile("kerolamp2.ply");
     return 0;
 }

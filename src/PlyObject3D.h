@@ -23,11 +23,9 @@ namespace O
 
         PlyObject3D(std::string filename);
 
-        //PlyObject3D(std::vector<V::Vertex> v, std::vector<F::Face> f);
-
-        //PlyObject3D(std::vector<V::Vertex> v, bool colV, std::vector<F::Face> f, bool colF);
-
         std::string afficherInfo(int size) const;
+
+        void createFile(std::string fileName);
 
         const std::vector<V::Vertex> & getV() const;
 

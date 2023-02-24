@@ -12,7 +12,7 @@ using namespace F;
  * getId : return you the value of id attribute
  * @return
  */
-const std::vector<int> &Face::getIndex() const {
+const std::vector<int> Face::getIndex() const {
     return index;
 }
 

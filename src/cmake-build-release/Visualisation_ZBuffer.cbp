@@ -94,12 +94,6 @@
 		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/PlyObject3D.h">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>
-		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/ReadPlyFile.cpp">
-			<Option target="Visualisation_ZBuffer"/>
-		</Unit>
-		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/ReadPlyFile.h">
-			<Option target="Visualisation_ZBuffer"/>
-		</Unit>
 		<Unit filename="C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/Vertex.cpp">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>
