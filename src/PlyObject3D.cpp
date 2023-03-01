@@ -90,7 +90,6 @@ PlyObject3D::PlyObject3D(std::string filename) {
         if (colV) {
             unsigned int r, g, b, a;
             ss >> r >> g >> b >> a;
-            //std::cout << r << g << b << a << std::endl;
             auto cr = static_cast<unsigned char>(r);
             auto cg = static_cast<unsigned char>(g);
             auto cb = static_cast<unsigned char>(b);
@@ -142,6 +141,7 @@ PlyObject3D::PlyObject3D(std::string filename) {
             face.setA(ca);
             face.setIndex(index);
         }
+
         f.push_back(face);
     }
     computeFaceNormals();
@@ -177,10 +177,8 @@ string PlyObject3D::afficherInfo(int size) const{
             info += "liste des faces : \n";
             for (int i = 0; i < this->f.size(); ++i) {
                 info += this->getF()[i].afficherInfo() + "\n";
-            }
-            info += "nombre de normales : " + std::to_string(this->n.size()) + "\n";
-            for (const auto & i : this->n) {
-                info += i.afficherInfo() + "\n";
+                V::Vertex t = this->n[i];
+                info += "normale de la face : " + t.afficherInfo() + "\n";
             }
             break;
         default:
@@ -307,11 +305,12 @@ void PlyObject3D::computeFaceNormals() {
         if(f[i].getIndex().size() > 3){
             throw std::runtime_error("Nombre de face != 3");
         }
+
         V::Vertex u;
-        V::Vertex v;
+        V::Vertex v1;
         //calculer u et v
         V::Vertex A = this->v[this->f[i].getIndex()[0]];
-        //std::cout << A.afficherInfo() << std::endl;
+        //std::cout << f[i].afficherInfo() << std::endl;
         V::Vertex B = this->v[this->f[i].getIndex()[1]];
         //std::cout << B.afficherInfo() << std::endl;
         V::Vertex C = this->v[this->f[i].getIndex()[2]];
@@ -320,19 +319,16 @@ void PlyObject3D::computeFaceNormals() {
         u.setX(B.getX()-A.getX());
         u.setY(B.getY()-A.getY());
         u.setZ(B.getZ()-A.getZ());
-        std::cout << u.afficherInfo() << std::endl;
+        //std::cout << u.afficherInfo() << std::endl;
 
-        v.setX(C.getX()-A.getX());
-        v.setY(C.getY()-A.getY());
-        v.setZ(C.getZ()-A.getZ());
-        std::cout << v.afficherInfo() << std::endl;
+        v1.setX(C.getX()-A.getX());
+        v1.setY(C.getY()-A.getY());
+        v1.setZ(C.getZ()-A.getZ());
+        //std::cout << v.afficherInfo() << std::endl;
 
-        V::Vertex w = cross(u,v);
-        w = normalize(w);
-        w.setA(0);
-        w.setB(0);
-        w.setR(0);
-        w.setG(0);
+        V::Vertex w = cross(u,v1);
+        //w = normalize(w);
+        //std::cout << "normale : " + w.afficherInfo() << std::endl;
         this->n.push_back(w);
     }
 }

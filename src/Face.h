@@ -7,6 +7,7 @@
 
 #include <utility>
 #include <vector>
+#include "Vertex.h"
 #include "string"
 
 namespace F
@@ -41,14 +42,13 @@ namespace F
 
         std::string afficherInfo() const;
 
-        void addVertexIndex(int vertex_index);
-
     private:
         std::vector<int> index;
         unsigned char r;
         unsigned char g;
         unsigned char b;
         unsigned char a;
+
     };
 
 

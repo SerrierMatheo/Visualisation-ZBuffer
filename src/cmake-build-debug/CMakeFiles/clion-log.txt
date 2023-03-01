@@ -1,4 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -D CMAKE_<LANG>_COMPILER=[fully qualified compiler name] -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" C:\Users\serma\CLionProjects\Visualisation-ZBuffer\src
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/serma/CLionProjects/Visualisation-ZBuffer/src/cmake-build-debug

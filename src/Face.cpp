@@ -63,12 +63,14 @@ string Face::afficherInfo() const{
     return info;
 }
 
-void Face::addVertexIndex(int vertex_index) {
-    index.push_back(vertex_index);
-}
+
 
 Face::Face(const vector<int> &index) {
     this->index = index;
+    this->r = 0;
+    this->g = 0;
+    this->b = 0;
+    this->a = 0;
 }
 
 Face::Face() {

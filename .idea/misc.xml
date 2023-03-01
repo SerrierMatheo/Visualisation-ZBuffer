@@ -7,5 +7,8 @@
     <sourceRoots>
       <file path="$PROJECT_DIR$/src" />
     </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/src/googletest" />
+    </libraryRoots>
   </component>
 </project>

@@ -4,8 +4,8 @@ import filecmp
 
 def compare_files(file1, file2):
     # Spécifier le chemin complet des fichiers
-    file1_path = os.path.join("..", "Ressources", file1)
-    file2_path = os.path.join("..", "Ressources", file2)
+    file1_path = os.path.join("../..", "Ressources", file1)
+    file2_path = os.path.join("../..", "Ressources", file2)
 
     # Vérifier si les deux fichiers existent
     if not (os.path.exists(file1_path) and os.path.exists(file2_path)):
@@ -34,4 +34,4 @@ def compare_files(file1, file2):
 
 
 # Exemple d'utilisation
-compare_files("airplane.ply", "airplane1.ply")
+compare_files("test.ply", "test3.ply")
