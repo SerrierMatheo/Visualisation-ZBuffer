@@ -53,7 +53,7 @@ int main() {
 
     //-------------------------------------------------------------------------------------
 
-    PlyObject3D obj("pyramideTri.ply");
+    PlyObject3D obj("cubeNorm.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("airplane2.ply");
     return 0;

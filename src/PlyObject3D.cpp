@@ -118,6 +118,7 @@ PlyObject3D::PlyObject3D(std::string filename) {
                 index.push_back(id);
             }
             face.setIndex(index);
+
         } else {
 
             int vertexIndexCount;
@@ -141,12 +142,13 @@ PlyObject3D::PlyObject3D(std::string filename) {
             face.setA(ca);
             face.setIndex(index);
         }
-
         f.push_back(face);
     }
+    flipOrientation();
     computeFaceNormals();
     file.close();
 }
+
 
 string PlyObject3D::afficherInfo(int size) const{
 
@@ -280,6 +282,7 @@ void PlyObject3D::createFile(string fileName) {
     file.close();
 }
 
+//TODO vérifier porduit vectoriel
 //calcul de produit vectoriel
 V::Vertex PlyObject3D::cross(V::Vertex v1, V::Vertex v2) {
     V::Vertex result;
@@ -324,13 +327,34 @@ void PlyObject3D::computeFaceNormals() {
         v1.setX(C.getX()-A.getX());
         v1.setY(C.getY()-A.getY());
         v1.setZ(C.getZ()-A.getZ());
-        //std::cout << v.afficherInfo() << std::endl;
+        //std::cout << v1.afficherInfo() << std::endl;
 
         V::Vertex w = cross(u,v1);
         //w = normalize(w);
         //std::cout << "normale : " + w.afficherInfo() << std::endl;
         this->n.push_back(w);
     }
+}
+
+void PlyObject3D::flipOrientation() {
+    for (int i = 0; i < f.size(); ++i) {
+        V::Vertex v1 = this->v[this->f[i].getIndex()[0]];
+        V::Vertex v2 = this->v[this->f[i].getIndex()[1]];
+        V::Vertex v3 = this->v[this->f[i].getIndex()[2]];
+        bool b = f[i].isClockwise(v1,v2,v3);
+        int i0 = this->f[i].getIndex()[0];
+        int i1 = this->f[i].getIndex()[1];
+        int i2 = this->f[i].getIndex()[2];
+        std::vector<int> newIndex = {i0,i2,i1};
+        if(b){
+            std::cout << "face [" + std::to_string(i) + "] : clockwise" << std::endl;
+        }else {
+            this->f[i].setIndex(newIndex);
+            std::cout << "face [" + std::to_string(i) + "] : counterclockwise" << std::endl;
+        }
+    }
+
+
 }
 
 

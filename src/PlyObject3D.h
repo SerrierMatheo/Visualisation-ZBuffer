@@ -49,6 +49,8 @@ namespace O
 
         void computeFaceNormals();
 
+        void flipOrientation();
+
     private:
         std::vector <V::Vertex> v;
         bool colV;

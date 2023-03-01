@@ -82,3 +82,11 @@ Face::Face() {
     this->a = 0;
 }
 
+bool Face::isClockwise(V::Vertex A, V::Vertex B, V::Vertex C) {
+    double crossProductX = (B.getY() - A.getY()) * (C.getZ() - A.getZ()) - (B.getZ() - A.getZ()) * (C.getY() - A.getY());
+    double crossProductY = (B.getZ() - A.getZ()) * (C.getX() - A.getX()) - (B.getX() - A.getX()) * (C.getZ() - A.getZ());
+    double crossProductZ = (B.getX() - A.getX()) * (C.getY() - A.getY()) - (B.getY() - A.getY()) * (C.getX() - A.getX());
+    double crossProduct = crossProductX + crossProductY + crossProductZ;
+    return crossProduct < 0;
+}
+
