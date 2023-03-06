@@ -14,7 +14,6 @@ typedef struct { // Caméra
 } Camera;
 
 typedef struct { // Face d'un objet
-  SDL_Surface *tex;      // Texture de la face
   vector<int> points;    // Indices des sommets de la face
   vector<PointImage> uv; // Liste des coordonnées textures des sommets de la face
   Vec normale;           // Normale à la face

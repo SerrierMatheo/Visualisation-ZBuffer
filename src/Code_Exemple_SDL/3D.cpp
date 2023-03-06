@@ -125,7 +125,7 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
 ///////////////////////////////////////////
 void constructionCaisse(Objet &obj)
 {
-  SDL_Surface *texCaisse = IMG_Load("Caisse.bmp"); // Texture de la caisse
+  SDL_Surface *texCaisse = SDL_LoadBMP("Caisse.bmp");
   int k = 0;                                       // Indice de point
 
   // Construction des sommets de la caisse
@@ -146,14 +146,17 @@ void constructionCaisse(Objet &obj)
   // Construction des 6 faces
   obj.faces.resize(6);
   for(int i=0; i<6; ++i){
-    obj.faces[i].tex = texCaisse;
     obj.faces[i].points.resize(4);
     obj.faces[i].uv.resize(4);
     obj.faces[i].normale.resize(3, 0);
-    obj.faces[i].uv[0] = {0, 0};
-    obj.faces[i].uv[1] = {texCaisse->w-1, 0};
-    obj.faces[i].uv[2] = {texCaisse->w-1, texCaisse->h-1};
-    obj.faces[i].uv[3] = {0, texCaisse->h-1};
+    obj.faces[i].uv[0].col = 0;
+    obj.faces[i].uv[0].lig = 0;
+    obj.faces[i].uv[1].col = texCaisse->w-1;
+    obj.faces[i].uv[1].lig = 0;
+    obj.faces[i].uv[2].col = texCaisse->w-1;
+    obj.faces[i].uv[2].lig = texCaisse->h-1;
+    obj.faces[i].uv[3].col = 0; 
+    obj.faces[i].uv[3].lig = texCaisse->h-1;
   }
   // Face 0
   obj.faces[0].points[0] = 3;
