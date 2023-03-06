@@ -293,7 +293,7 @@ V::Vertex PlyObject3D::cross(V::Vertex v1, V::Vertex v2) {
 }
 
 //normalise la normale obtenue grâce au produit vectoriel des representant de la face
-V::Vertex PlyObject3D::normalize(V::Vertex w) {
+void PlyObject3D::normalize(V::Vertex w) {
     double norm = sqrt(w.getX()*w.getX() + w.getY()*w.getY() + w.getZ()*w.getZ());
 
     w.setX(w.getX() / norm);
@@ -330,7 +330,7 @@ void PlyObject3D::computeFaceNormals() {
         //std::cout << v1.afficherInfo() << std::endl;
 
         V::Vertex w = cross(u,v1);
-        //w = normalize(w);
+        normalize(w);
         //std::cout << "normale : " + w.afficherInfo() << std::endl;
         this->n.push_back(w);
     }

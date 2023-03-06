@@ -1,0 +1,3 @@
+/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/Code_Exemple_SDL/CMakeFiles/Infographie.dir
+/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/Code_Exemple_SDL/CMakeFiles/edit_cache.dir
+/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/Code_Exemple_SDL/CMakeFiles/rebuild_cache.dir

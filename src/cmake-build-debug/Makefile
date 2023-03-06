@@ -177,30 +177,6 @@ PlyObject3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.s
 .PHONY : PlyObject3D.cpp.s
 
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o
-
-# target to build an object file
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
-
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i
-
-# target to preprocess a source file
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
-
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s
-
-# target to generate assembly for a file
-Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
-.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
-
 Vertex.o: Vertex.cpp.o
 .PHONY : Vertex.o
 
@@ -249,30 +225,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-test/test.o: test/test.cpp.o
-.PHONY : test/test.o
-
-# target to build an object file
-test/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o
-.PHONY : test/test.cpp.o
-
-test/test.i: test/test.cpp.i
-.PHONY : test/test.i
-
-# target to preprocess a source file
-test/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.i
-.PHONY : test/test.cpp.i
-
-test/test.s: test/test.cpp.s
-.PHONY : test/test.s
-
-# target to generate assembly for a file
-test/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.s
-.PHONY : test/test.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -288,18 +240,12 @@ help:
 	@echo "... PlyObject3D.o"
 	@echo "... PlyObject3D.i"
 	@echo "... PlyObject3D.s"
-	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o"
-	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i"
-	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s"
 	@echo "... Vertex.o"
 	@echo "... Vertex.i"
 	@echo "... Vertex.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... test/test.o"
-	@echo "... test/test.i"
-	@echo "... test/test.s"
 .PHONY : help
 
 

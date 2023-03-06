@@ -45,7 +45,7 @@ namespace O
 
         V::Vertex cross(V::Vertex v1, V::Vertex v2);
 
-        V::Vertex normalize(V::Vertex w);
+        void normalize(V::Vertex w);
 
         void computeFaceNormals();
 

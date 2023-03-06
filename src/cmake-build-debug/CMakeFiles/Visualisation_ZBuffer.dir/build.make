@@ -69,19 +69,19 @@ include CMakeFiles/Visualisation_ZBuffer.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Visualisation_ZBuffer.dir/flags.make
 
-CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
-CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp
-CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp
+CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
+CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp
+CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp
 
-CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp > CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i
+CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp > CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i
 
-CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s
+CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s
 
 CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
 CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/PlyObject3D.cpp
@@ -111,69 +111,39 @@ CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Vertex.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.s
 
-CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
-CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp
-CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp
+CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
+CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp
+CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp
 
-CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp > CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.i
+CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp > CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.i
 
-CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.s
-
-CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
-CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/test/test.cpp
-CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/test/test.cpp
-
-CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/test/test.cpp > CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.i
-
-CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/test/test.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.s
-
-CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/flags.make
-CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o: /Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp
-CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o: CMakeFiles/Visualisation_ZBuffer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o -MF CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o.d -o CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o -c /Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp
-
-CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp > CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
-
-CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
+CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp -o CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.s
 
 # Object files for target Visualisation_ZBuffer
 Visualisation_ZBuffer_OBJECTS = \
-"CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o" \
+"CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o" \
 "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o" \
 "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o" \
-"CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o" \
-"CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o" \
-"CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o"
+"CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o"
 
 # External object files for target Visualisation_ZBuffer
 Visualisation_ZBuffer_EXTERNAL_OBJECTS =
 
-Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o
+Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o
 Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o
 Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o
-Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o
-Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o
-Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
+Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o
 Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/build.make
+Visualisation_ZBuffer: /usr/local/lib/libSDLmain.a
+Visualisation_ZBuffer: /usr/local/lib/libSDL.dylib
 Visualisation_ZBuffer: CMakeFiles/Visualisation_ZBuffer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Visualisation_ZBuffer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Visualisation_ZBuffer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Visualisation_ZBuffer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

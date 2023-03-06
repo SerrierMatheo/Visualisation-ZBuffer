@@ -10,10 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/PlyObject3D.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o.d"
-  "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Vertex.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/main.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/main.cpp.o.d"
-  "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/test/test.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/test/test.cpp.o.d"
   )
 
 # Targets to which this target links.

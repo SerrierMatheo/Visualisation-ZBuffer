@@ -47,8 +47,6 @@ void AffichagePrincipal (Etat &etat)
       break;  
     }
 
-
-
     // Mise à jour de l'affichage de la fenêtre SDL
     MiseAJour(etat.image);
   }
