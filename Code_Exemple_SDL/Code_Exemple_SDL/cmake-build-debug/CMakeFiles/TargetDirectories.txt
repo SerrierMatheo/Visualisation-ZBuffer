@@ -1,0 +1,3 @@
+/Users/stages/Documents/Matheo/Code_Exemple_SDL/Code_Exemple_SDL/cmake-build-debug/CMakeFiles/Infographie.dir
+/Users/stages/Documents/Matheo/Code_Exemple_SDL/Code_Exemple_SDL/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/stages/Documents/Matheo/Code_Exemple_SDL/Code_Exemple_SDL/cmake-build-debug/CMakeFiles/rebuild_cache.dir

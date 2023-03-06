@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
 		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>

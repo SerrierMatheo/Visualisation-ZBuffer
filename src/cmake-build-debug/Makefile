@@ -177,6 +177,30 @@ PlyObject3D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.s
 .PHONY : PlyObject3D.cpp.s
 
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o
+
+# target to build an object file
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.o
+
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i
+
+# target to preprocess a source file
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.i
+
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s: Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s
+
+# target to generate assembly for a file
+Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
+.PHONY : Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.cpp.s
+
 Vertex.o: Vertex.cpp.o
 .PHONY : Vertex.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... PlyObject3D.o"
 	@echo "... PlyObject3D.i"
 	@echo "... PlyObject3D.s"
+	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.o"
+	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.i"
+	@echo "... Users/stages/Documents/Matheo/Visualisation-ZBuffer/Code_Exemple_SDL/infographie.s"
 	@echo "... Vertex.o"
 	@echo "... Vertex.i"
 	@echo "... Vertex.s"

@@ -34,4 +34,4 @@ def compare_files(file1, file2):
 
 
 # Exemple d'utilisation
-compare_files("test.ply", "test3.ply")
+compare_files("kerolamp.ply", "kerolamp2.ply")
