@@ -1,4 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.o"
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.o.d"
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.o"
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.o.d"
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.o"
+  "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.o.d"
   "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o"
   "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o.d"
   "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o"

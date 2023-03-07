@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Face.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.o.d"
+  "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Object3D.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.o.d"
+  "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Vertex.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Face.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/PlyObject3D.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/PlyObject3D.cpp.o.d"
   "/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Vertex.cpp" "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o" "gcc" "CMakeFiles/Visualisation_ZBuffer.dir/Vertex.cpp.o.d"

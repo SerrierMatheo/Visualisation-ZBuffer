@@ -129,6 +129,78 @@ Visualisation_ZBuffer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/build
 .PHONY : Visualisation_ZBuffer/fast
 
+Code_Exemple_SDL/Face.o: Code_Exemple_SDL/Face.cpp.o
+.PHONY : Code_Exemple_SDL/Face.o
+
+# target to build an object file
+Code_Exemple_SDL/Face.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.o
+.PHONY : Code_Exemple_SDL/Face.cpp.o
+
+Code_Exemple_SDL/Face.i: Code_Exemple_SDL/Face.cpp.i
+.PHONY : Code_Exemple_SDL/Face.i
+
+# target to preprocess a source file
+Code_Exemple_SDL/Face.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.i
+.PHONY : Code_Exemple_SDL/Face.cpp.i
+
+Code_Exemple_SDL/Face.s: Code_Exemple_SDL/Face.cpp.s
+.PHONY : Code_Exemple_SDL/Face.s
+
+# target to generate assembly for a file
+Code_Exemple_SDL/Face.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Face.cpp.s
+.PHONY : Code_Exemple_SDL/Face.cpp.s
+
+Code_Exemple_SDL/Object3D.o: Code_Exemple_SDL/Object3D.cpp.o
+.PHONY : Code_Exemple_SDL/Object3D.o
+
+# target to build an object file
+Code_Exemple_SDL/Object3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.o
+.PHONY : Code_Exemple_SDL/Object3D.cpp.o
+
+Code_Exemple_SDL/Object3D.i: Code_Exemple_SDL/Object3D.cpp.i
+.PHONY : Code_Exemple_SDL/Object3D.i
+
+# target to preprocess a source file
+Code_Exemple_SDL/Object3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.i
+.PHONY : Code_Exemple_SDL/Object3D.cpp.i
+
+Code_Exemple_SDL/Object3D.s: Code_Exemple_SDL/Object3D.cpp.s
+.PHONY : Code_Exemple_SDL/Object3D.s
+
+# target to generate assembly for a file
+Code_Exemple_SDL/Object3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Object3D.cpp.s
+.PHONY : Code_Exemple_SDL/Object3D.cpp.s
+
+Code_Exemple_SDL/Vertex.o: Code_Exemple_SDL/Vertex.cpp.o
+.PHONY : Code_Exemple_SDL/Vertex.o
+
+# target to build an object file
+Code_Exemple_SDL/Vertex.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.o
+.PHONY : Code_Exemple_SDL/Vertex.cpp.o
+
+Code_Exemple_SDL/Vertex.i: Code_Exemple_SDL/Vertex.cpp.i
+.PHONY : Code_Exemple_SDL/Vertex.i
+
+# target to preprocess a source file
+Code_Exemple_SDL/Vertex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.i
+.PHONY : Code_Exemple_SDL/Vertex.cpp.i
+
+Code_Exemple_SDL/Vertex.s: Code_Exemple_SDL/Vertex.cpp.s
+.PHONY : Code_Exemple_SDL/Vertex.s
+
+# target to generate assembly for a file
+Code_Exemple_SDL/Vertex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Visualisation_ZBuffer.dir/build.make CMakeFiles/Visualisation_ZBuffer.dir/Code_Exemple_SDL/Vertex.cpp.s
+.PHONY : Code_Exemple_SDL/Vertex.cpp.s
+
 Face.o: Face.cpp.o
 .PHONY : Face.o
 
@@ -234,6 +306,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Visualisation_ZBuffer"
+	@echo "... Code_Exemple_SDL/Face.o"
+	@echo "... Code_Exemple_SDL/Face.i"
+	@echo "... Code_Exemple_SDL/Face.s"
+	@echo "... Code_Exemple_SDL/Object3D.o"
+	@echo "... Code_Exemple_SDL/Object3D.i"
+	@echo "... Code_Exemple_SDL/Object3D.s"
+	@echo "... Code_Exemple_SDL/Vertex.o"
+	@echo "... Code_Exemple_SDL/Vertex.i"
+	@echo "... Code_Exemple_SDL/Vertex.s"
 	@echo "... Face.o"
 	@echo "... Face.i"
 	@echo "... Face.s"

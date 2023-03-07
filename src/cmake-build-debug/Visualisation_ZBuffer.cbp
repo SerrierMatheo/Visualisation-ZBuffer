@@ -82,6 +82,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Face.cpp">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Face.h">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Object3D.cpp">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Object3D.h">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Vertex.cpp">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
+		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Code_Exemple_SDL/Vertex.h">
+			<Option target="Visualisation_ZBuffer"/>
+		</Unit>
 		<Unit filename="/Users/stages/Documents/Matheo/Visualisation-ZBuffer/src/Face.cpp">
 			<Option target="Visualisation_ZBuffer"/>
 		</Unit>

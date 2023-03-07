@@ -12,6 +12,6 @@ using namespace std;
 int main() {
     PlyObject3D obj("cubeNorm.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
-    obj.createFile("airplane2.ply");
+    //obj.createFile("cubeNorm2.ply");
     return 0;
 }
