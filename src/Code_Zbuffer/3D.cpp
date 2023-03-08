@@ -2,6 +2,7 @@
 #include "3D.h"
 #include "triangles.h"
 #include "formesSimples.h"
+#include "Segment.h"
 
 ///////////////////////////////////////////
 // Calcul de la matrice projetant les points 
@@ -12,25 +13,23 @@ void matriceMondeVersCamera(Camera &cam, Mat &mat)
   Vec Xc(3), Yc(3), Zc(3); // Vecteurs unitaires du repère caméra
   Vec verticale(3,0);      // Vecteur 3D donnant la verticale du monde virtuel
   Vec CO;                  // Vecteur allant du centre de la caméra à l'origine du monde virtuel
+  Vec O (3, 0);
+  Vec C (3, 0);
+  C[0] = cam.pos[0];
+  C[1] = cam.pos[1];
+  C[2] = cam.pos[2];
 
   //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
   //CHAQUE PARTIE INDIQUÉE CI-DESSOUS
 
-    // Vecteur CO (verticale est le vecteur nul à ce stade)
-    CO[0] = cam.pos[0];
-    CO[1] = cam.pos[1];
-    CO[2] = cam.pos[2];
-    for (int i = 0; i < 3; i++) {
-        CO[i] *= -1;
-    }
+  // Vecteur CO (verticale est le vecteur nul à ce stade)
+  vecDiff(O,C,CO);
 
     // La verticale du monde virtuel est unitaire sur l'axe Z
     verticale[2] = 1.0;
 
     // Axe Z caméra
-    Zc[0] = cam.cible[0] - cam.pos[0];
-    Zc[1] = cam.cible[1] - cam.pos[1];
-    Zc[2] = cam.cible[2] - cam.pos[2];
+    vecDiff(C,cam.cible,Zc);
     normalisation(Zc);
 
     // Axe X caméra
@@ -43,22 +42,17 @@ void matriceMondeVersCamera(Camera &cam, Mat &mat)
 
     // Remplissage de la matrice
     identite(mat);
+
     for (int i = 0; i < 3; i++) {
         mat[i][0] = Xc[i];
         mat[i][1] = Yc[i];
         mat[i][2] = Zc[i];
-        Vec vect;
-        vect.push_back(Xc[i]);
-        vect.push_back(Yc[i]);
-        vect.push_back(Zc[i]);
-        mat[i][3] = -prodScal(vect, cam.pos);
     }
-    // Mise à l'échelle
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 4; j++) {
-            mat[i][j] *= cam.echelle;
-        }
-    }
+    mat[3][0]=prodScal(Xc, cam.pos);
+    mat[3][1]=prodScal(Yc, cam.pos);
+    mat[3][2]=prodScal(Zc, cam.pos);
+
+    matCoef(mat,cam.echelle);
 }
 
 ///////////////////////////////////////////
@@ -70,8 +64,14 @@ void positionDansImage(Vec &ptCamera, PointImage &pi, SDL_Surface *image)
   //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
   // Positionnement final du point dans l'image
   // sachant que le centre optique est au centre de l'image
-  // pi.col = (int)...
-  // pi.lig = (int)...
+  //Centre d'image = cam
+  //Déplacement de ptCam avec cam = pi
+  Vec cam(2);
+  cam[0] = image->w/2;
+  cam[1] = image->h/2;
+
+  pi.col = (int)(ptCamera[0] + cam[0]);
+  pi.lig = (int)(ptCamera[1] + cam[1]);
 }
 
 ///////////////////////////////////////////
@@ -108,11 +108,14 @@ void dessineRepere(Mat &matProj, SDL_Surface *image)
   Disque(lstPts[1], 5, rouge, image); // X
   Disque(lstPts[2], 5, vert, image);  // Y
   Disque(lstPts[3], 5, bleu, image);  // Z
+
+    DrawSegment(lstPts[0],lstPts[1],blanc,image);
 }
 
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
+//TODO Dessiner les segments entre les points
 void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
 {
   Vec pt;                    // Point projeté
@@ -247,7 +250,7 @@ void Test3D(SDL_Surface *image)
     cam.cible.resize(3, 0);
     cam.pos.resize(3, 0);
     cam.pos[2] = 3;
-    cam.echelle = 250; // Ratio entre unité monde et nombre de pixels
+    cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
     cameraInit = true;
   }else{ // Sinon mise à jour de l'angle de rotation de la caméra
     angle += 0.005;

@@ -143,7 +143,7 @@ int main(int argc, char **argv)
     Uint32 dureeIteration = 1000/30; // Durée fixée de chaque itération (selon le framerate)
 
     // Init état global
-    etat.action = TRIANGLES;//FORMESSIMPLES;
+    etat.action = PROJECTION;//FORMESSIMPLES;
     etat.dejaFait = false;
     etat.nbActions = NBACTIONS;
 
