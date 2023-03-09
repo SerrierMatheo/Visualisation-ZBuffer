@@ -48,6 +48,7 @@ namespace O
 
         void computeFaceNormals();
 
+        //orienté les normales dans le même sens
         void flipOrientation();
 
     private:

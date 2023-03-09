@@ -3,6 +3,8 @@
 #include "triangles.h"
 #include "formesSimples.h"
 #include "Segment.h"
+#include "matrices.h"
+
 
 ///////////////////////////////////////////
 // Calcul de la matrice projetant les points 
@@ -109,7 +111,10 @@ void dessineRepere(Mat &matProj, SDL_Surface *image)
   Disque(lstPts[2], 5, vert, image);  // Y
   Disque(lstPts[3], 5, bleu, image);  // Z
 
-    DrawSegment(lstPts[0],lstPts[1],blanc,image);
+  DrawSegment(lstPts[0], lstPts[1], blanc, image); //X
+  DrawSegment(lstPts[0], lstPts[2], blanc, image); //Y
+  DrawSegment(lstPts[0], lstPts[3], blanc, image); //Z
+
 }
 
 ///////////////////////////////////////////
@@ -123,6 +128,7 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   PointImage pts[3];         // Liste des sommets d'un triangle à afficher dans l'image
   PointImage uv[3];          // Liste des coords UV des sommets du triangle
   Couleur blanc = {255, 255, 255, 0}; // Couleurs pour les traits et points
+  Couleur rouge = {255, 0, 0, 0};
 
   // Projection des sommets de l'objet
   pt.resize(4);
@@ -140,13 +146,15 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
 
     if(aFaire){
       //>>>>>>>>>> À MODIFIER <<<<<<<<<<
-      
       // Parcours des sommets
       for(size_t j=0; j<obj.faces[i].points.size(); ++j){
         int indA = obj.faces[i].points[j];
-        // Coloriage du sommet courant avec un point de rayon 5 pixels
+        int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
+          // Coloriage du sommet courant avec un point de rayon 5 pixels
         Disque(lstPts[indA], 5, blanc, image);
+        DrawSegment(lstPts[indA],lstPts[indB],blanc, image);
       }
+
     }
   }
 }
@@ -253,10 +261,10 @@ void Test3D(SDL_Surface *image)
     cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
     cameraInit = true;
   }else{ // Sinon mise à jour de l'angle de rotation de la caméra
-    angle += 0.005;
+    angle += 0.050;
   }
 
-  // Mise à jour position X,Y de la caméra
+  // Mise à jour position X, Y de la caméra
   cam.pos[0] = rayon * cos(angle);
   cam.pos[1] = rayon * sin(angle);
 
@@ -264,8 +272,10 @@ void Test3D(SDL_Surface *image)
   matriceMondeVersCamera(cam, matProj);
 
   // Dessin du repère 3D
-  dessineRepere(matProj, image);  
+  dessineRepere(matProj, image);
 
   // Dessin de la caisse
-  dessineObjet(caisse, matProj, image);  
+  dessineObjet(caisse, matProj, image);
+
+
 }
