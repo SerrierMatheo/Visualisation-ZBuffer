@@ -132,9 +132,10 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    /**O::Object3D obj("cubeNorm.ply");
+    O::Object3D obj("cubeNorm.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
-    obj.createFile("cubeNorm2");*/
+    //obj.createFile("cubeNorm2");
+    //Objet o = convertObject3D(obj);
 
     Uint32 configuration;            // Configuration de la fenêtre SDL
     bool fini = false;               // Indique quant le programme doit s'arrêter

@@ -45,14 +45,20 @@ void matriceMondeVersCamera(Camera &cam, Mat &mat)
     // Remplissage de la matrice
     identite(mat);
 
-    for (int i = 0; i < 3; i++) {
-        mat[i][0] = Xc[i];
-        mat[i][1] = Yc[i];
-        mat[i][2] = Zc[i];
-    }
-    mat[3][0]=prodScal(Xc, cam.pos);
-    mat[3][1]=prodScal(Yc, cam.pos);
-    mat[3][2]=prodScal(Zc, cam.pos);
+    mat[0][0]=Xc[0];
+    mat[0][1]=Xc[1];
+    mat[0][2]=Xc[2];
+    mat[0][3]=prodScal(Xc, CO);
+
+    mat[1][0]=Yc[0];
+    mat[1][1]=Yc[1];
+    mat[1][2]=Yc[2];
+    mat[1][3]=prodScal(Yc, CO);
+
+    mat[2][0]=Zc[0];
+    mat[2][1]=Zc[1];
+    mat[2][2]=Zc[2];
+    mat[2][3]=prodScal(Zc, CO);
 
     matCoef(mat,cam.echelle);
 }
@@ -111,16 +117,15 @@ void dessineRepere(Mat &matProj, SDL_Surface *image)
   Disque(lstPts[2], 5, vert, image);  // Y
   Disque(lstPts[3], 5, bleu, image);  // Z
 
-  DrawSegment(lstPts[0], lstPts[1], blanc, image); //X
-  DrawSegment(lstPts[0], lstPts[2], blanc, image); //Y
-  DrawSegment(lstPts[0], lstPts[3], blanc, image); //Z
+  DrawSegment(lstPts[0], lstPts[1], rouge, image); //X
+  DrawSegment(lstPts[0], lstPts[2], vert, image); //Y
+  DrawSegment(lstPts[0], lstPts[3], bleu, image); //Z
 
 }
 
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
-//TODO Dessiner les segments entre les points
 void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
 {
   Vec pt;                    // Point projeté
@@ -144,6 +149,7 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
     bool aFaire = true; // Booléen utiliser pour indiquer si l'on doit afficher la face ou non
     //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
 
+    //TODO à modifier pour dessiner des triangles correspondant aux faces
     if(aFaire){
       //>>>>>>>>>> À MODIFIER <<<<<<<<<<
       // Parcours des sommets
@@ -152,9 +158,8 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
         int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
           // Coloriage du sommet courant avec un point de rayon 5 pixels
         Disque(lstPts[indA], 5, blanc, image);
-        DrawSegment(lstPts[indA],lstPts[indB],blanc, image);
+        DrawSegment(lstPts[indA],lstPts[indB],rouge, image);
       }
-
     }
   }
 }
@@ -258,17 +263,17 @@ void Test3D(SDL_Surface *image)
     cam.cible.resize(3, 0);
     cam.pos.resize(3, 0);
     cam.pos[2] = 3;
-    cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
+    cam.echelle = 200; // Ratio entre unité monde et nombre de pixels
     cameraInit = true;
   }else{ // Sinon mise à jour de l'angle de rotation de la caméra
-    angle += 0.050;
+    angle += 0.005;
   }
 
   // Mise à jour position X, Y de la caméra
   cam.pos[0] = rayon * cos(angle);
   cam.pos[1] = rayon * sin(angle);
 
-  // Construction de la matrice de projection
+    // Construction de la matrice de projection
   matriceMondeVersCamera(cam, matProj);
 
   // Dessin du repère 3D

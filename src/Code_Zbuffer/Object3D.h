@@ -9,6 +9,7 @@
 #include "Face.h"
 #include "vector"
 #include "iostream"
+#include "3D.h"
 
 namespace O
 {
@@ -61,6 +62,6 @@ namespace O
     };
 }
 
-
+//Objet convertObject3D(O::Object3D o);
 
 #endif //VISUALISATION_ZBUFFER_OBJECT3D_H
