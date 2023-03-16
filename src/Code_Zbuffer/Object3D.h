@@ -52,6 +52,10 @@ namespace O
         //orienté les normales dans le même sens
         void flipOrientation();
 
+        const vector<V::Vertex> &getN() const;
+
+        static Objet Object3DtoObjet(Object3D o);
+
     private:
         std::vector <V::Vertex> v;
         bool colV;
@@ -62,6 +66,12 @@ namespace O
     };
 }
 
+/**
+ * methode convertObject3D
+ * permet la conversion d'un Object3D en Objet pour le dessin 3D
+ * @param o
+ * @return objet de type Objet
+ */
 //Objet convertObject3D(O::Object3D o);
 
 #endif //VISUALISATION_ZBUFFER_OBJECT3D_H

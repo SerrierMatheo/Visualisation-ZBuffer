@@ -1,6 +1,5 @@
 #include <math.h>
 #include "3D.h"
-#include "triangles.h"
 #include "formesSimples.h"
 #include "Segment.h"
 #include "matrices.h"
@@ -263,7 +262,7 @@ void Test3D(SDL_Surface *image)
     cam.cible.resize(3, 0);
     cam.pos.resize(3, 0);
     cam.pos[2] = 3;
-    cam.echelle = 200; // Ratio entre unité monde et nombre de pixels
+    cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
     cameraInit = true;
   }else{ // Sinon mise à jour de l'angle de rotation de la caméra
     angle += 0.005;
@@ -281,6 +280,5 @@ void Test3D(SDL_Surface *image)
 
   // Dessin de la caisse
   dessineObjet(caisse, matProj, image);
-
 
 }

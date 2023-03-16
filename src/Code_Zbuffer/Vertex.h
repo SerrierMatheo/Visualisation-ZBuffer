@@ -111,7 +111,6 @@ namespace V
         unsigned char g;
         unsigned char b;
         unsigned char a;
-
     };
 
 

@@ -16,7 +16,8 @@ typedef struct { // Caméra
 typedef struct { // Face d'un objet
   vector<int> points;    // Indices des sommets de la face
   vector<PointImage> uv; // Liste des coordonnées textures des sommets de la face
-  Vec normale;           // Normale à la face
+  Vec normale; // Normale à la face
+  Couleur c; // couleur de la face
 } Face;
 
 typedef struct { // Objet complet

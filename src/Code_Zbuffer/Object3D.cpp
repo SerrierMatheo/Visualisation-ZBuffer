@@ -223,6 +223,10 @@ void O::Object3D::setColF(bool cF) {
     Object3D::colF = cF;
 }
 
+const vector<V::Vertex> &Object3D::getN() const {
+    return n;
+}
+
 void Object3D::createFile(string fileName) {
     string filePath = "../Ressources/" + fileName + ".ply";
     ofstream file(filePath); //creation du fichier dans le repertoire
@@ -357,6 +361,76 @@ void Object3D::flipOrientation() {
             std::cout << "face [" + std::to_string(i) + "] : counterclockwise" << std::endl;
         }
     }
+}
 
+/**
+* Permet de convertir un Object3D en objet
+* @param o un Object3D
+* @return obj un Objet
+*/
+Objet Object3D::Object3DtoObjet(Object3D o) {
+    Objet obj;
 
+    //remplir le vector de faces de obj
+
+    //parcours des faces
+    for (int i = 0; i < o.getF().size(); ++i) {
+        Face f;
+        f.points = o.getF()[i].getIndex();
+
+        //donne la couleur à la face courante
+        if (o.isColF()){
+            unsigned char r = static_cast<unsigned char>(o.getF()[i].getR());
+            unsigned char g = static_cast<unsigned char>(o.getF()[i].getG());
+            unsigned char b = static_cast<unsigned char>(o.getF()[i].getB());
+            unsigned char a = static_cast<unsigned char>(o.getF()[i].getA());
+            Couleur c = {r, g, b, a};
+            f.c = c;
+        }else{
+            Couleur c = {255, 255, 255, 0};
+            f.c = c;
+        }
+
+        //initialise uv
+        vector<PointImage> ptIm;
+        f.uv = ptIm;
+
+        //Attribution de la normale
+        double x,y,z;
+        x = o.getN()[i].getX();
+        y = o.getN()[i].getY();
+        z = o.getN()[i].getZ();
+        Vec norm;
+        norm.push_back(x);
+        norm.push_back(y);
+        norm.push_back(z);
+        f.normale = norm;
+
+        //ajoute la face au vector de faces de obj
+        obj.faces.push_back(f);
+    }
+
+    //remplir point de obj
+    Mat p;
+
+    //parcourir v de o
+    for (int i = 0; i < o.getV().size(); ++i) {
+        //recupérer x,y,z de o.v[i]
+        double x,y,z;
+        x = o.getV()[i].getX();
+        y = o.getV()[i].getY();
+        z = o.getV()[i].getZ();
+        Vec point;
+        point.push_back(x);
+        point.push_back(y);
+        point.push_back(z);
+
+        //ajoute les points à la matrice
+        p.push_back(point);
+    }
+
+    //initialise points de obj
+    obj.points = p;
+
+    return obj;
 }
