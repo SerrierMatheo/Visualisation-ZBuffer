@@ -396,6 +396,7 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
         f.uv = ptIm;
 
         //Attribution de la normale
+        //dans l'ordre des faces car c'est dans ce même ordre qu'elles sont stockés par l'Object3D
         double x,y,z;
         x = o.getN()[i].getX();
         y = o.getN()[i].getY();
