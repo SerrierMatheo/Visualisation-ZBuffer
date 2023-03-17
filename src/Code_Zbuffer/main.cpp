@@ -21,7 +21,7 @@
 // Fonction principale d'affichage appelée en boucle par le programme
 // L'affichage à faire à chaque appel est identifié par une action
 ///////////////////////////////////////////
-void AffichagePrincipal (Etat &etat)
+void AffichagePrincipal (Etat &etat, Objet o)
 {
     Couleur noir = {0, 0, 0, 0};  // Couleur : noir
 
@@ -51,6 +51,11 @@ void AffichagePrincipal (Etat &etat)
                 printf("PROJECTION\n");
                 Test3D(etat.image);
                 break;
+            case CONV:
+                printf("Test conversion\n");
+                //méthode de test sur cubeNorm
+                TestConv(etat.image, o);
+                break;
         }
 
         // Mise à jour de l'affichage de la fenêtre SDL
@@ -63,6 +68,7 @@ void AffichagePrincipal (Etat &etat)
 ///////////////////////////////////////////
 bool GestionEvts(Etat &etat)
 {
+    //TODO ajouter un zoom avec + et -
     bool ret = false; // Valeur de retour de la fonction (vrai pour signaler l'arrêt)
 
     switch (etat.evt.type){ // Types d'événements pris en compte
@@ -89,6 +95,14 @@ bool GestionEvts(Etat &etat)
                     break;
                 case 'q':            // Arrêt du programme
                     ret = true;
+                    break;
+                case '=':
+                    printf("zoom");
+                    //Doit augmenter la valeur de cam.echelle
+                    break;
+                case '-':
+                    printf("dezoom");
+                    //Doit diminuer la valeur de cam.echelle
                     break;
                 case ' ' :           // Changement de l'action d'affichage
                 {
@@ -132,7 +146,7 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    O::Object3D obj("cubeNorm.ply");
+    O::Object3D obj("Al.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("cubeNorm2");
     Objet o = O::Object3D::Object3DtoObjet(obj);
@@ -144,7 +158,7 @@ int main(int argc, char **argv)
     Uint32 dureeIteration = 1000/30; // Durée fixée de chaque itération (selon le framerate)
 
     // Init état global
-    etat.action = PROJECTION;//FORMESSIMPLES;
+    etat.action = CONV;//FORMESSIMPLES;
     etat.dejaFait = false;
     etat.nbActions = NBACTIONS;
 
@@ -173,7 +187,7 @@ int main(int argc, char **argv)
 
         debut = SDL_GetTicks();            // Horloge au départ de l'itération
 
-        AffichagePrincipal(etat);          // Affichage
+        AffichagePrincipal(etat, o);          // Affichage
 
         while(SDL_PollEvent(&(etat.evt))){ // Gestion des événements
             fini = GestionEvts(etat);

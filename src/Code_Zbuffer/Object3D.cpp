@@ -287,7 +287,6 @@ void Object3D::createFile(string fileName) {
     file.close();
 }
 
-//TODO vérifier porduit vectoriel
 //calcul de produit vectoriel
 V::Vertex Object3D::cross(V::Vertex v1, V::Vertex v2) {
     V::Vertex result;
@@ -385,13 +384,14 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
             unsigned char b = static_cast<unsigned char>(o.getF()[i].getB());
             unsigned char a = static_cast<unsigned char>(o.getF()[i].getA());
             Couleur c = {r, g, b, a};
-            f.c = c;
+            f.c.push_back(c);
         }else{
             Couleur c = {255, 255, 255, 0};
-            f.c = c;
+            f.c.push_back(c);
         }
 
         //initialise uv
+        //TODO remplir les uv
         vector<PointImage> ptIm;
         f.uv = ptIm;
 

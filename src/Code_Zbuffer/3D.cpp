@@ -2,7 +2,9 @@
 #include "3D.h"
 #include "formesSimples.h"
 #include "Segment.h"
+#include "triangles.h"
 #include "matrices.h"
+#include <iostream>
 
 
 ///////////////////////////////////////////
@@ -111,10 +113,10 @@ void dessineRepere(Mat &matProj, SDL_Surface *image)
   }
 
   // Dessin des 4 points
-  Disque(lstPts[0], 5, blanc, image); // Origine
-  Disque(lstPts[1], 5, rouge, image); // X
-  Disque(lstPts[2], 5, vert, image);  // Y
-  Disque(lstPts[3], 5, bleu, image);  // Z
+  Disque(lstPts[0], 3, blanc, image); // Origine
+  Disque(lstPts[1], 3, rouge, image); // X
+  Disque(lstPts[2], 3, vert, image);  // Y
+  Disque(lstPts[3], 3, bleu, image);  // Z
 
   DrawSegment(lstPts[0], lstPts[1], rouge, image); //X
   DrawSegment(lstPts[0], lstPts[2], vert, image); //Y
@@ -133,10 +135,12 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   PointImage uv[3];          // Liste des coords UV des sommets du triangle
   Couleur blanc = {255, 255, 255, 0}; // Couleurs pour les traits et points
   Couleur rouge = {255, 0, 0, 0};
+  Couleur jaune = {255, 255, 0, 0};
 
   // Projection des sommets de l'objet
   pt.resize(4);
   lstPts.resize(obj.points.size());
+
   for(size_t i=0; i<obj.points.size(); ++i){ // Parcours des points
     // Projection du point dans le repère caméra
     projection(matProj, obj.points[i], pt);
@@ -147,18 +151,30 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   for(size_t i=0; i<obj.faces.size(); ++i){
     bool aFaire = true; // Booléen utiliser pour indiquer si l'on doit afficher la face ou non
     //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
-
+    int strat = 0;
     //TODO à modifier pour dessiner des triangles correspondant aux faces
     if(aFaire){
-      //>>>>>>>>>> À MODIFIER <<<<<<<<<<
-      // Parcours des sommets
-      for(size_t j=0; j<obj.faces[i].points.size(); ++j){
-        int indA = obj.faces[i].points[j];
-        int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
-          // Coloriage du sommet courant avec un point de rayon 5 pixels
-        Disque(lstPts[indA], 5, blanc, image);
-        DrawSegment(lstPts[indA],lstPts[indB],rouge, image);
-      }
+        switch(strat){
+            case 0: //segment
+                // Parcours des sommets
+                for(size_t j=0; j<obj.faces[i].points.size(); ++j){
+                    int indA = obj.faces[i].points[j];
+                    int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
+                    // Coloriage du sommet courant avec un point de rayon 5 pixels
+                    Disque(lstPts[indA], 1, blanc, image);
+                    DrawSegment(lstPts[indA],lstPts[indB],jaune, image);
+                }
+                break;
+            case 1: //triangle
+                for(size_t j=0; j<obj.faces.size(); ++j){
+                    //TODO  Corriger dessin triangle
+
+                    Triangle(obj.faces[i].uv, obj.faces[i].c, image);
+                }
+                break;
+            default:
+                break;
+        }
     }
   }
 }
@@ -237,6 +253,47 @@ void constructionCaisse(Objet &obj)
   obj.faces[5].points[3] = 1;
   obj.faces[5].normale[2] = 1;
 }
+
+
+void TestConv(SDL_Surface *image, Objet obj){
+    static Objet objet = obj;
+    static Camera cam;              // Caméra
+    static Mat matProj;             // Matrice de projection du monde virtuel vers la caméra
+    static bool objetInit = false; // Indique si l'objet est construit
+    static bool cameraInit = false; // Indique si la caméra est initialisée
+    static double angle = -M_PI/4;  // Position de la caméra autour de la caisse
+    double rayon = 3;               // Rayon du cercle décrit par la caméra
+
+    // Construction de l'objet s'il n'est pas déjà construit
+    if(!objetInit){
+        objetInit = true;
+    }
+
+    // Initialisation de la caméra si elle n'est pas déjà initialisée
+    if(!cameraInit){
+        cam.cible.resize(3, 0);
+        cam.pos.resize(3, 0);
+        cam.pos[2] = 3;
+        cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
+        cameraInit = true;
+    }else{ // Sinon mise à jour de l'angle de rotation de la caméra
+        angle += 0.05;
+    }
+
+    // Mise à jour position X, Y de la caméra
+    cam.pos[0] = rayon * cos(angle);
+    cam.pos[1] = rayon * sin(angle);
+
+    // Construction de la matrice de projection
+    matriceMondeVersCamera(cam, matProj);
+
+    // Dessin de l'objet
+    dessineObjet(obj, matProj, image);
+
+    // Dessin du repère 3D
+    dessineRepere(matProj, image);
+}
+
 
 ///////////////////////////////////////////
 // Test des fonctions de dessin d'objets 3D

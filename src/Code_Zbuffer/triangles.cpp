@@ -74,7 +74,7 @@ void Triangle(vector<PointImage> &pts, vector<Couleur> &couls, SDL_Surface *imag
     DrawSegment(haut, bas, couls[2], image);
 
     DemiTriangle(haut, milieu, bas, couls[0], image);
-    DemiTriangle(bas, milieu, haut, couls[1], image);
+    DemiTriangle(bas, milieu, haut, couls[0], image);
 }
 
 ///////////////////////////////////////////

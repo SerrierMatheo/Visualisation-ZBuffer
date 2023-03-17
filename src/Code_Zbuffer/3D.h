@@ -17,7 +17,7 @@ typedef struct { // Face d'un objet
   vector<int> points;    // Indices des sommets de la face
   vector<PointImage> uv; // Liste des coordonnées textures des sommets de la face
   Vec normale; // Normale à la face
-  Couleur c; // couleur de la face
+  vector<Couleur> c; // couleur de la face
 } Face;
 
 typedef struct { // Objet complet
@@ -44,5 +44,7 @@ extern void constructionCaisse(Objet &obj);
 // Test des fonctions de dessin d'objets 3D
 ///////////////////////////////////////////
 extern void Test3D(SDL_Surface *image);
+
+extern void TestConv(SDL_Surface *image, Objet obj);
 
 #endif
