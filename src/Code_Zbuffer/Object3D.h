@@ -54,6 +54,8 @@ namespace O
 
         const vector<V::Vertex> &getN() const;
 
+        vector<vector<int> > polygonToTriangles(F::Face f);
+
         static Objet Object3DtoObjet(Object3D o);
 
     private:

@@ -122,6 +122,7 @@ Object3D::Object3D(std::string filename) {
                 face.setA(0);
                 index.push_back(id);
             }
+
             face.setIndex(index);
 
         } else {
@@ -147,8 +148,25 @@ Object3D::Object3D(std::string filename) {
             face.setA(0);
             face.setIndex(index);
         }
-        f.push_back(face);
+        //TODO appeler polygonToTriangles() et ajouter les faces à f
+        vector<vector<int> > vtriangles = polygonToTriangles(face);
+
+        if(f.size() > 1){
+            for (int j = 0; j < vtriangles.size(); ++j) {
+                F::Face fc;
+                fc.setIndex(vtriangles[j]);
+                fc.setR(face.getR());
+                fc.setG(face.getG());
+                fc.setB(face.getB());
+                fc.setA(face.getA());
+                f.push_back(fc);
+            }
+        }else {
+            f.push_back(face);
+        }
     }
+
+    //décomposition des faces non triangulaire
     flipOrientation();
     computeFaceNormals();
     file.close();
@@ -314,7 +332,8 @@ void Object3D::computeFaceNormals() {
 
     for (int i = 0; i < f.size(); ++i) {
         if(f[i].getIndex().size() > 3){
-            throw std::runtime_error("Nombre de face != 3");
+            //TODO erreur du au découpage en triangle
+            throw std::runtime_error("Nombre de sommets != 3");
         }
 
         V::Vertex u;
@@ -366,6 +385,7 @@ void Object3D::flipOrientation() {
     }
 }
 
+
 /**
 * Permet de convertir un Object3D en objet
 * @param o un Object3D
@@ -393,9 +413,7 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
             Couleur c = {0, 0, 0, 0};
             f.c.push_back(c);
         }
-
         //Vector uv is empty
-
         //Attribution de la normale
         //dans l'ordre des faces car c'est dans ce même ordre qu'elles sont stockés par l'Object3D
         double x,y,z;
@@ -433,6 +451,25 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
 
     //initialise points de obj
     obj.points = p;
-
     return obj;
+}
+
+//f a plus de 3 sommets
+//TODO à modifier
+vector<vector<int> > Object3D::polygonToTriangles(F::Face f) {
+    vector<vector<int> > vIndex;
+
+    if (f.getIndex().size() > 3) {
+        for (int i = 1; i < f.getIndex().size() - 1; i++) {
+            vector<int> triangle; //= { f.getIndex()[0], f.getIndex()[i], f.getIndex()[i+1] };
+            triangle.push_back(f.getIndex()[0]);
+            triangle.push_back(f.getIndex()[i]);
+            triangle.push_back(f.getIndex()[i+1]);
+            vIndex.push_back(triangle);
+        }
+    } else {
+        vIndex.push_back(f.getIndex());
+    }
+
+    return vIndex;
 }

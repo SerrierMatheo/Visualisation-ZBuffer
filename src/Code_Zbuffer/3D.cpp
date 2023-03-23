@@ -134,7 +134,7 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   vector<PointImage> lstPts; // Liste des points dans l'image
   Couleur blanc = {255, 255, 255, 200}; // Couleurs pour les traits et points
   Couleur rouge = {255, 0, 0, 0};
-  Couleur bleu = {0, 0, 255, 200};
+  Couleur bleu = {0, 0, 255, 0};
   Couleur jaune = {255, 255, 0, 0};
 
   // Projection des sommets de l'objet
@@ -158,16 +158,13 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   for(size_t i=0; i<obj.faces.size(); ++i)
   {
       Face f = obj.faces[i];
-      //Couleur c = f.c[0];
-      //std::cout << "id Face : " + std::to_string(i)+ " ; c = "+ to_string(f.c[0].R) + ", " + to_string(f.c[0].V) + ", " + to_string(f.c[0].B) + ", " + to_string(f.c[0].A) << std::endl;
-      //f.c.push_back(c);
       Triangle(f.uv, f.c, image);
 
        for(size_t j=0; j<obj.faces[i].points.size(); ++j){
            int indA = obj.faces[i].points[j];
            int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
            // Coloriage du sommet courant avec un point de rayon 5 pixels
-           Disque(lstPts[indA], 1, blanc, image);
+           Disque(lstPts[indA], 1, bleu, image);
            DrawSegment(lstPts[indA],lstPts[indB],bleu, image);
        }
   }
@@ -268,7 +265,7 @@ void TestConv(SDL_Surface *image, Objet obj){
         cam.cible.resize(3, 0);
         cam.pos.resize(3, 0);
         cam.pos[2] = 3;
-        cam.echelle = 35; // Ratio entre unité monde et nombre de pixels
+        cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
         cameraInit = true;
     }else{ // Sinon mise à jour de l'angle de rotation de la caméra
         angle += 0.05;
@@ -281,13 +278,11 @@ void TestConv(SDL_Surface *image, Objet obj){
     // Construction de la matrice de projection
     matriceMondeVersCamera(cam, matProj);
 
-    // Dessin du repère 3D
-    dessineRepere(matProj, image);
-
     // Dessin de l'objet
     dessineObjet(obj, matProj, image);
 
-
+    // Dessin du repère 3D
+    dessineRepere(matProj, image);
 }
 
 
@@ -349,4 +344,6 @@ vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image) {
     }
     return uv;
 }
+
+
 
