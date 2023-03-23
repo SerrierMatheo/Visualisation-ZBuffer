@@ -5,6 +5,7 @@
 #include "triangles.h"
 #include "matrices.h"
 #include <iostream>
+#include <cstdio>
 
 
 ///////////////////////////////////////////
@@ -76,7 +77,7 @@ void positionDansImage(Vec &ptCamera, PointImage &pi, SDL_Surface *image)
   //Centre d'image = cam
   //Déplacement de ptCam avec cam = pi
   Vec cam(2);
-  cam[0] = image->w/2;
+  cam[0] = image->w/2; //TODO à mettre à 2
   cam[1] = image->h/2;
 
   pi.col = (int)(ptCamera[0] + cam[0]);
@@ -131,10 +132,9 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
 {
   Vec pt;                    // Point projeté
   vector<PointImage> lstPts; // Liste des points dans l'image
-  PointImage pts[3];         // Liste des sommets d'un triangle à afficher dans l'image
-  PointImage uv[3];          // Liste des coords UV des sommets du triangle
-  Couleur blanc = {255, 255, 255, 0}; // Couleurs pour les traits et points
+  Couleur blanc = {255, 255, 255, 200}; // Couleurs pour les traits et points
   Couleur rouge = {255, 0, 0, 0};
+  Couleur bleu = {0, 0, 255, 200};
   Couleur jaune = {255, 255, 0, 0};
 
   // Projection des sommets de l'objet
@@ -146,36 +146,30 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
     projection(matProj, obj.points[i], pt);
     positionDansImage(pt, lstPts[i], image);
   }
+  // project 3D point and fill uv vector
+  vector<PointImage> vecPtI = ProjectObjet(obj, matProj, image);
+  for(size_t it=0; it<obj.faces.size(); it++) {
+      Face &f = obj.faces.at(it);
+      for(size_t it_bis = 0; it_bis< f.points.size(); it_bis++) {
+          f.uv.push_back(vecPtI.at(f.points.at(it_bis)));
+      }
+  }
 
-  // Parcours des faces
-  for(size_t i=0; i<obj.faces.size(); ++i){
-    bool aFaire = true; // Booléen utiliser pour indiquer si l'on doit afficher la face ou non
-    //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
-    int strat = 0;
-    //TODO à modifier pour dessiner des triangles correspondant aux faces
-    if(aFaire){
-        switch(strat){
-            case 0: //segment
-                // Parcours des sommets
-                for(size_t j=0; j<obj.faces[i].points.size(); ++j){
-                    int indA = obj.faces[i].points[j];
-                    int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
-                    // Coloriage du sommet courant avec un point de rayon 5 pixels
-                    Disque(lstPts[indA], 1, blanc, image);
-                    DrawSegment(lstPts[indA],lstPts[indB],jaune, image);
-                }
-                break;
-            case 1: //triangle
-                for(size_t j=0; j<obj.faces.size(); ++j){
-                    //TODO  Corriger dessin triangle
+  for(size_t i=0; i<obj.faces.size(); ++i)
+  {
+      Face f = obj.faces[i];
+      //Couleur c = f.c[0];
+      //std::cout << "id Face : " + std::to_string(i)+ " ; c = "+ to_string(f.c[0].R) + ", " + to_string(f.c[0].V) + ", " + to_string(f.c[0].B) + ", " + to_string(f.c[0].A) << std::endl;
+      //f.c.push_back(c);
+      Triangle(f.uv, f.c, image);
 
-                    Triangle(obj.faces[i].uv, obj.faces[i].c, image);
-                }
-                break;
-            default:
-                break;
-        }
-    }
+       for(size_t j=0; j<obj.faces[i].points.size(); ++j){
+           int indA = obj.faces[i].points[j];
+           int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
+           // Coloriage du sommet courant avec un point de rayon 5 pixels
+           Disque(lstPts[indA], 1, blanc, image);
+           DrawSegment(lstPts[indA],lstPts[indB],bleu, image);
+       }
   }
 }
 
@@ -274,7 +268,7 @@ void TestConv(SDL_Surface *image, Objet obj){
         cam.cible.resize(3, 0);
         cam.pos.resize(3, 0);
         cam.pos[2] = 3;
-        cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
+        cam.echelle = 35; // Ratio entre unité monde et nombre de pixels
         cameraInit = true;
     }else{ // Sinon mise à jour de l'angle de rotation de la caméra
         angle += 0.05;
@@ -287,11 +281,13 @@ void TestConv(SDL_Surface *image, Objet obj){
     // Construction de la matrice de projection
     matriceMondeVersCamera(cam, matProj);
 
+    // Dessin du repère 3D
+    dessineRepere(matProj, image);
+
     // Dessin de l'objet
     dessineObjet(obj, matProj, image);
 
-    // Dessin du repère 3D
-    dessineRepere(matProj, image);
+
 }
 
 
@@ -339,3 +335,18 @@ void Test3D(SDL_Surface *image)
   dessineObjet(caisse, matProj, image);
 
 }
+
+
+vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image) {
+    Vec pt;                    // Point projeté
+    PointImage pi;
+    vector<PointImage> uv;
+    for(size_t i=0; i<obj.points.size(); ++i){ // Parcours des points
+        // Projection du point dans le repère caméra
+        projection(matProj, obj.points[i], pt);
+        positionDansImage(pt, pi, image);
+        uv.push_back(pi);
+    }
+    return uv;
+}
+

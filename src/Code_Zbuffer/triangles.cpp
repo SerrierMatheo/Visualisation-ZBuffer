@@ -51,7 +51,14 @@ void Triangle(vector<PointImage> &pts, vector<Couleur> &couls, SDL_Surface *imag
     PointImage haut = pts[0];
     PointImage bas = pts[1];
     PointImage milieu = pts[2];
-    while (true){
+
+    bool sort = true;
+    //traiter le cas ou un côté est horizontal
+    if((haut.lig == milieu.lig) || (haut.lig == bas.lig) || (milieu.lig == bas.lig)){
+        sort = false;
+    }
+
+    while (sort){
         if(((haut.lig < milieu.lig) && (haut.lig < bas.lig)) && ((bas.lig > haut.lig) && (bas.lig > milieu.lig)))
             break;
         if ((haut.lig > milieu.lig) && (haut.lig > bas.lig)) {
@@ -69,12 +76,28 @@ void Triangle(vector<PointImage> &pts, vector<Couleur> &couls, SDL_Surface *imag
         }
     }
 
-    DrawSegment(milieu, haut, couls[2], image);
-    DrawSegment(milieu, bas, couls[2], image);
-    DrawSegment(haut, bas, couls[2], image);
+    DrawSegment(milieu, haut, couls[0], image);
+    DrawSegment(milieu, bas, couls[0], image);
+    DrawSegment(haut, bas, couls[0], image);
 
-    DemiTriangle(haut, milieu, bas, couls[0], image);
-    DemiTriangle(bas, milieu, haut, couls[0], image);
+
+    //si haut.lig = milieu.lig
+    if(haut.lig == milieu.lig){
+        DemiTriangle(bas, milieu, haut, couls[0], image);
+    }else if(bas.lig == milieu.lig){
+        DemiTriangle(haut, milieu, bas, couls[0], image);
+    }else if(haut.lig == bas.lig){
+        std::swap(bas,milieu);
+        if(bas.lig < haut.lig){
+            swap(bas,haut);
+            DemiTriangle(haut,milieu,bas, couls[0], image);
+        }else{
+            DemiTriangle(bas, milieu, haut, couls[0], image);
+        }
+    }else{
+        DemiTriangle(haut, milieu, bas, couls[0], image);
+        DemiTriangle(bas, milieu, haut, couls[0], image);
+    }
 }
 
 ///////////////////////////////////////////

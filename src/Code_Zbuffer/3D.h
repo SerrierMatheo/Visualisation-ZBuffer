@@ -25,6 +25,9 @@ typedef struct { // Objet complet
   vector<Face> faces;    // Liste des faces de l'objet
 } Objet;
 
+extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj,SDL_Surface *image);
+
+
 ///////////////////////////////////////////
 // Calcul de la matrice de la caméra
 ///////////////////////////////////////////

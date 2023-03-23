@@ -23,7 +23,7 @@
 ///////////////////////////////////////////
 void AffichagePrincipal (Etat &etat, Objet o)
 {
-    Couleur noir = {0, 0, 0, 0};  // Couleur : noir
+    Couleur noir = {255, 255, 255, 0};  // Couleur : noir
 
     // Affichage seulement s'il n'a pas déjà été fait (pour éviter charge CPU inutile)
     if(!etat.dejaFait){
@@ -146,10 +146,11 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    O::Object3D obj("Al.ply");
+    O::Object3D obj("boy.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("cubeNorm2");
-    Objet o = O::Object3D::Object3DtoObjet(obj);
+    Objet o;
+    o = O::Object3D::Object3DtoObjet(obj);
 
     Uint32 configuration;            // Configuration de la fenêtre SDL
     bool fini = false;               // Indique quant le programme doit s'arrêter
@@ -171,7 +172,7 @@ int main(int argc, char **argv)
 
     // Initialisation des dimensions de la fenêtre
     etat.Largeur = 1250;
-    etat.Hauteur = 700;
+    etat.Hauteur = 800;
 
     // Création fenêtre SDL
     configuration  = SDL_HWSURFACE | SDL_DOUBLEBUF;  // Spécification du type de fenêtre SDL

@@ -116,6 +116,10 @@ Object3D::Object3D(std::string filename) {
                 int id;
                 file >> id;
                 //std::cout << std::to_string(id) << std::endl;
+                face.setR(0);
+                face.setG(0);
+                face.setB(0);
+                face.setA(0);
                 index.push_back(id);
             }
             face.setIndex(index);
@@ -140,7 +144,7 @@ Object3D::Object3D(std::string filename) {
             face.setR(cr);
             face.setG(cg);
             face.setB(cb);
-            face.setA(ca);
+            face.setA(0);
             face.setIndex(index);
         }
         f.push_back(face);
@@ -386,14 +390,11 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
             Couleur c = {r, g, b, a};
             f.c.push_back(c);
         }else{
-            Couleur c = {255, 255, 255, 0};
+            Couleur c = {0, 0, 0, 0};
             f.c.push_back(c);
         }
 
-        //initialise uv
-        //TODO remplir les uv
-        vector<PointImage> ptIm;
-        f.uv = ptIm;
+        //Vector uv is empty
 
         //Attribution de la normale
         //dans l'ordre des faces car c'est dans ce même ordre qu'elles sont stockés par l'Object3D

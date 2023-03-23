@@ -62,7 +62,6 @@ void DisqueNaif(PointImage centre, int rayon, Couleur coul, SDL_Surface *image) 
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << "Temps d'execution naif : " << duration.count() << " nanoseconds" << std::endl;
 }
 
 
@@ -127,7 +126,6 @@ void Disque(PointImage centre, int rayon, Couleur coul, SDL_Surface *image)
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << "Temps d'execution bresenham : " << duration.count() << " nanoseconds" << std::endl;
 }
 
 ///////////////////////////////////////////
