@@ -105,6 +105,7 @@ Object3D::Object3D(std::string filename) {
 
 
     // Lecture des faces
+    //    for (int i = 0; i < faceCount; i++) {
     for (int i = 0; i < faceCount; i++) {
         F::Face face;
         if (!colF) {
@@ -151,7 +152,7 @@ Object3D::Object3D(std::string filename) {
         //TODO appeler polygonToTriangles() et ajouter les faces à f
         vector<vector<int> > vtriangles = polygonToTriangles(face);
 
-        if(f.size() > 1){
+        if(vtriangles.size() > 1){
             for (int j = 0; j < vtriangles.size(); ++j) {
                 F::Face fc;
                 fc.setIndex(vtriangles[j]);
@@ -160,6 +161,7 @@ Object3D::Object3D(std::string filename) {
                 fc.setB(face.getB());
                 fc.setA(face.getA());
                 f.push_back(fc);
+                fc.afficherInfo();
             }
         }else {
             f.push_back(face);

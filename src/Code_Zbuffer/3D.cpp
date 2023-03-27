@@ -136,6 +136,7 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
   Couleur rouge = {255, 0, 0, 0};
   Couleur bleu = {0, 0, 255, 0};
   Couleur jaune = {255, 255, 0, 0};
+  Couleur noir = {0, 0, 0, 240};
 
   // Projection des sommets de l'objet
   pt.resize(4);
@@ -164,8 +165,8 @@ void dessineObjet(Objet &obj, Mat &matProj, SDL_Surface *image)
            int indA = obj.faces[i].points[j];
            int indB = obj.faces[i].points[(j+1) % obj.faces[i].points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
            // Coloriage du sommet courant avec un point de rayon 5 pixels
-           Disque(lstPts[indA], 1, bleu, image);
-           DrawSegment(lstPts[indA],lstPts[indB],bleu, image);
+           Disque(lstPts[indA], 1, noir, image);
+           DrawSegment(lstPts[indA],lstPts[indB],noir, image);
        }
   }
 }
@@ -265,7 +266,7 @@ void TestConv(SDL_Surface *image, Objet obj){
         cam.cible.resize(3, 0);
         cam.pos.resize(3, 0);
         cam.pos[2] = 3;
-        cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
+        cam.echelle = 35; // Ratio entre unité monde et nombre de pixels
         cameraInit = true;
     }else{ // Sinon mise à jour de l'angle de rotation de la caméra
         angle += 0.05;

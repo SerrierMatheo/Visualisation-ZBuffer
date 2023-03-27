@@ -146,7 +146,7 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    O::Object3D obj("cube.ply");
+    O::Object3D obj("boy.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("cubeNorm2");
     Objet o;
