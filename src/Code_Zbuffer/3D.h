@@ -50,4 +50,6 @@ extern void Test3D(SDL_Surface *image);
 
 extern void TestConv(SDL_Surface *image, Objet obj);
 
+vector<Face> backfaceCulling(Objet obj, Camera cam);
+
 #endif

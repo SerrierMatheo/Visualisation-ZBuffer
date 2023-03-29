@@ -334,7 +334,6 @@ void Object3D::computeFaceNormals() {
 
     for (int i = 0; i < f.size(); ++i) {
         if(f[i].getIndex().size() > 3){
-            //TODO erreur du au découpage en triangle
             throw std::runtime_error("Nombre de sommets != 3");
         }
 
@@ -359,7 +358,7 @@ void Object3D::computeFaceNormals() {
         //std::cout << v1.afficherInfo() << std::endl;
 
         V::Vertex w = cross(u,v1);
-        normalize(w);
+        //normalize(w);
         //std::cout << "normale : " + w.afficherInfo() << std::endl;
         this->n.push_back(w);
     }
