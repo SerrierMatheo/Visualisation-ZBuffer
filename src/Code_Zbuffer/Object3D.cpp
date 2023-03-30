@@ -103,7 +103,6 @@ Object3D::Object3D(std::string filename) {
         v.push_back(vertex);
     }
 
-
     // Lecture des faces
     //    for (int i = 0; i < faceCount; i++) {
     for (int i = 0; i < faceCount; i++) {
@@ -123,9 +122,7 @@ Object3D::Object3D(std::string filename) {
                 face.setA(0);
                 index.push_back(id);
             }
-
             face.setIndex(index);
-
         } else {
 
             int vertexIndexCount;
@@ -149,7 +146,7 @@ Object3D::Object3D(std::string filename) {
             face.setA(0);
             face.setIndex(index);
         }
-        //TODO appeler polygonToTriangles() et ajouter les faces à f
+
         vector<vector<int> > vtriangles = polygonToTriangles(face);
 
         if(vtriangles.size() > 1){
@@ -358,7 +355,7 @@ void Object3D::computeFaceNormals() {
         //std::cout << v1.afficherInfo() << std::endl;
 
         V::Vertex w = cross(u,v1);
-        //normalize(w);
+        normalize(w);
         //std::cout << "normale : " + w.afficherInfo() << std::endl;
         this->n.push_back(w);
     }
@@ -377,10 +374,10 @@ void Object3D::flipOrientation() {
         newIndex.push_back(i0);
         newIndex.push_back(i2);
         newIndex.push_back(i1);
-        if(b){
+        if(!b){
             std::cout << "face [" + std::to_string(i) + "] : clockwise" << std::endl;
         }else {
-            this->f[i].setIndex(newIndex);
+            //this->f[i].setIndex(newIndex);
             std::cout << "face [" + std::to_string(i) + "] : counterclockwise" << std::endl;
         }
     }

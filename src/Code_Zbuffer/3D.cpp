@@ -7,7 +7,6 @@
 #include <iostream>
 #include <cstdio>
 
-
 ///////////////////////////////////////////
 // Calcul de la matrice projetant les points 
 // du monde dans le repère de la caméra
@@ -22,9 +21,6 @@ void matriceMondeVersCamera(Camera &cam, Mat &mat)
   C[0] = cam.pos[0];
   C[1] = cam.pos[1];
   C[2] = cam.pos[2];
-
-  //>>>>>>>>>> À COMPLÉTER <<<<<<<<<<
-  //CHAQUE PARTIE INDIQUÉE CI-DESSOUS
 
   // Vecteur CO (verticale est le vecteur nul à ce stade)
   vecDiff(O,C,CO);
@@ -77,7 +73,7 @@ void positionDansImage(Vec &ptCamera, PointImage &pi, SDL_Surface *image)
   //Centre d'image = cam
   //Déplacement de ptCam avec cam = pi
   Vec cam(2);
-  cam[0] = image->w/2; //TODO à mettre à 2
+  cam[0] = image->w/2;
   cam[1] = image->h/2;
 
   pi.col = (int)(ptCamera[0] + cam[0]);
@@ -125,6 +121,28 @@ void dessineRepere(Mat &matProj, SDL_Surface *image)
 
 }
 
+void dessineVecteur(Mat &matProj,Vec p1, Vec p2, Couleur c,SDL_Surface *image)
+{
+    Vec pt(4);                          // Point projeté
+    vector<Vec> pts3D;               // Liste des 4 points dans le monde virtuel
+    vector<PointImage> lstPts(2);       // Liste des 4 points dans l'image
+    pts3D.push_back(p1);
+    pts3D.push_back(p2);
+
+    // Projection des sommets de l'objet
+    for(size_t i=0; i<pts3D.size(); ++i){ // Parcours des points
+        // Projection du point dans le repère caméra
+        projection(matProj, pts3D[i], pt);
+        positionDansImage(pt, lstPts[i], image);
+    }
+
+    // Dessin des é points
+    Disque(lstPts[0], 3, c, image);
+    Disque(lstPts[1], 3, c, image);
+
+    DrawSegment(lstPts[0], lstPts[1], c, image);
+}
+
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
@@ -157,10 +175,8 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
           f.uv.push_back(vecPtI.at(f.points.at(it_bis)));
       }
   }
-
     vector<Face> visibleFaces;
     visibleFaces = backfaceCulling(obj, cam);
-
 
     //affiche toutes les faces
     for(size_t i=0; i<obj.faces.size(); ++i)
@@ -176,26 +192,79 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
             DrawSegment(lstPts[indA],lstPts[indB],noir, image);
         }
     }
+
     //affiche uniquement les faces visibles depuis la caméra
-  //TODO parcourir sur les faces à afficher uniquement
     for(size_t i=0; i<visibleFaces.size(); ++i)
+    //for(size_t i=0; i<obj.faces.size(); ++i)
     {
         Face f = visibleFaces[i];
-        //Triangle(f.uv, vc, image);
+        //Face f = obj.faces[i];
+        Triangle(f.uv, f.c, image);
+        //Dessin normal vector of the face
 
+        Vec barycentre;
+        Vec sommet1 = obj.points[f.points[0]];
+        Vec sommet2 = obj.points[f.points[1]];
+        Vec sommet3 = obj.points[f.points[2]];
+
+        for (int j = 0; j < 3; ++j) {
+            barycentre.push_back((sommet1[j] + sommet2[j] + sommet3[j]) / 3);
+        }
+        dessineVecteur(matProj, barycentre, f.normale, jaune, image);
+        //dessiner les arrêtes des faces:
+        /*
         for(size_t j=0; j<f.points.size(); ++j){
             int indA = f.points[j];
             int indB = f.points[(j+1) % f.points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
             // Coloriage du sommet courant avec un point de rayon 5 pixels
             Disque(lstPts[indA], 1, rouge, image);
             DrawSegment(lstPts[indA],lstPts[indB],rouge, image);
+        }*/
+    }
+}
+
+void dessineCaisse(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
+{
+    Vec pt;                    // Point projeté
+    vector<PointImage> lstPts; // Liste des points dans l'image
+    Couleur blanc = {255, 255, 255, 200}; // Couleurs pour les traits et points
+    Couleur rouge = {255, 0, 0, 0};
+    Couleur bleu = {0, 0, 255, 0};
+    Couleur jaune = {255, 255, 0, 0};
+    Couleur noir = {0, 0, 0, 0};
+    vector<Couleur> vc;
+    vc.push_back(jaune);
+
+    // Projection des sommets de l'objet
+    pt.resize(4);
+    lstPts.resize(obj.points.size());
+
+    for(size_t i=0; i<obj.points.size(); ++i){ // Parcours des points
+        // Projection du point dans le repère caméra
+        projection(matProj, obj.points[i], pt);
+        positionDansImage(pt, lstPts[i], image);
+    }
+    // project 3D point and fill uv vector
+    vector<PointImage> vecPtI = ProjectObjet(obj, matProj, image);
+    for(size_t it=0; it<obj.faces.size(); it++) {
+        Face &f = obj.faces.at(it);
+        for(size_t it_bis = 0; it_bis< f.points.size(); it_bis++) {
+            f.uv.push_back(vecPtI.at(f.points.at(it_bis)));
         }
     }
 
-
-
-
-
+    //affiche toutes les faces
+    for(size_t i=0; i<obj.faces.size(); ++i)
+    {
+        Face f = obj.faces[i];
+        for(size_t j=0; j<f.points.size(); ++j){
+            int indA = f.points[j];
+            int indB = f.points[(j+1) % f.points.size()]; // Indice du sommet suivant, en prenant en compte le dernier sommet qui doit être relié au premier sommet
+            // Coloriage du sommet courant avec un point de rayon 5 pixels
+            Disque(lstPts[indA], 1, jaune, image);
+            DrawSegment(lstPts[indA],lstPts[indB],rouge, image);
+        }
+    }
 }
 
 ///////////////////////////////////////////
@@ -273,7 +342,6 @@ void constructionCaisse(Objet &obj)
   obj.faces[5].normale[2] = 1;
 }
 
-
 void TestConv(SDL_Surface *image, Objet obj){
     static Objet objet = obj;
     static Camera cam;              // Caméra
@@ -308,15 +376,12 @@ void TestConv(SDL_Surface *image, Objet obj){
 
     cout << std::to_string(cam.pos[0]) +" "+ std::to_string(cam.pos[1]) +" "+ std::to_string(cam.pos[1]) << endl;
 
-
-
     // Dessin de l'objet
     dessineObjet(obj, matProj, cam, image);
 
     // Dessin du repère 3D
     dessineRepere(matProj, image);
 }
-
 
 ///////////////////////////////////////////
 // Test des fonctions de dessin d'objets 3D
@@ -345,22 +410,21 @@ void Test3D(SDL_Surface *image)
     cam.echelle = 100; // Ratio entre unité monde et nombre de pixels
     cameraInit = true;
   }else{ // Sinon mise à jour de l'angle de rotation de la caméra
-    angle += 0.005;
+    angle += 0.05;
   }
 
   // Mise à jour position X, Y de la caméra
   cam.pos[0] = rayon * cos(angle);
   cam.pos[1] = rayon * sin(angle);
 
-    // Construction de la matrice de projection
+  // Construction de la matrice de projection
   matriceMondeVersCamera(cam, matProj);
 
   // Dessin du repère 3D
   dessineRepere(matProj, image);
 
   // Dessin de la caisse
-  dessineObjet(caisse, matProj, cam, image);
-
+  dessineCaisse(caisse, matProj, cam, image);
 }
 
 vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image) {
@@ -376,8 +440,7 @@ vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image) {
     return uv;
 }
 
-//TODO ne fonctionne pas correctement
-
+//TODO A verifier
 vector<Face> backfaceCulling(Objet obj, Camera cam){
     //liste des faces visibles d'un obj
     vector<Face> visibleFaces;
@@ -401,17 +464,17 @@ vector<Face> backfaceCulling(Objet obj, Camera cam){
 
         //Calculer le vecteur de la caméra en direction de la face
         Vec cameraVector;
-        double x = cam.pos[0] - barycentre[0];
-        double y = cam.pos[1] - barycentre[1];
-        double z = cam.pos[2] - barycentre[2];
+        double x = barycentre[0] - cam.pos[0];
+        double y =  barycentre[1] - cam.pos[1];
+        double z =  barycentre[2] - cam.pos[2];
         cameraVector.push_back(x);
         cameraVector.push_back(y);
         cameraVector.push_back(z);
 
         //Calcule du produit scalaire
-        double dotProduct = prodScal(cameraVector, normale);
+        double dotProduct = prodScal( normale, cameraVector);
 
-        //s'il est positif, la face est orientée vers la caméra, on ajoute la face à la liste
+        //s'il est négatif, la face est orientée vers la caméra, on ajoute la face à la liste
         if (dotProduct < 0){
             visibleFaces.push_back(obj.faces[i]);
         }
