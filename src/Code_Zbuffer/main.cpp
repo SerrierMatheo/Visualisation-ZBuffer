@@ -55,7 +55,7 @@ void AffichagePrincipal (Etat &etat, Objet o)
             case CONV:
                 printf("Test conversion\n");
                 //méthode de test sur cubeNorm
-                AfficherObjet(etat.image, o);
+                AfficherObjet(etat, o);
                 break;
         }
 

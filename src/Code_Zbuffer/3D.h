@@ -38,7 +38,7 @@ extern void dessineObjetBase(Objet &obj, Mat &matProj, SDL_Surface *image);
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
-extern void dessineObjet(Objet &obj, Camera &cam, SDL_Surface *image);
+extern void dessineObjet(Objet &obj, Camera &cam, Etat &etat);
 
 ///////////////////////////////////////////
 // Construction d'une caisse 3D
@@ -50,7 +50,7 @@ extern void constructionCaisse(Objet &obj);
 ///////////////////////////////////////////
 extern void Test3D(SDL_Surface *image);
 
-extern void AfficherObjet(SDL_Surface *image, Objet obj);
+extern void AfficherObjet(Etat &etat, Objet obj);
 
 //Vec computeCenter(Objet obj, Face face);
 

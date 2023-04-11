@@ -208,7 +208,7 @@ void dessineObjetBase(Objet &obj, Mat &matProj, SDL_Surface *image){
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
-void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
+void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat)
 {
   Vec pt;                    // Point projeté
   vector<PointImage> lstPts; // Liste des points dans l'image
@@ -227,10 +227,10 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
   for(size_t i=0; i<obj.points.size(); ++i){ // Parcours des points
     // Projection du point dans le repère caméra
     projection(matProj, obj.points[i], pt);
-    positionDansImage(pt, lstPts[i], image);
+    positionDansImage(pt, lstPts[i], etat.image);
   }
   // project 3D point and fill uv vector
-  vector<PointImage> vecPtI = ProjectObjet(obj, matProj, image);
+  vector<PointImage> vecPtI = ProjectObjet(obj, matProj, etat.image);
   for(size_t it=0; it<obj.faces.size(); it++) {
       Face &f = obj.faces.at(it);
       for(size_t it_bis = 0; it_bis< f.points.size(); it_bis++) {
@@ -247,7 +247,7 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
     {
         Face f = visibleFaces[i];
         //Face f = obj.faces[i];
-        Triangle(f.uv, f.c, image);
+        Triangle(f.uv, f.c, etat.image);
         //Dessin normal vector of the face
 
         //initialise barycentre
@@ -264,7 +264,7 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, SDL_Surface *image)
         //dessineVecteur(matProj, barycentre, f.normale, jaune, image);
         Vec test;
         test.resize(3,0);
-        dessineVecteur(matProj, test, cam.pos, jaune, image);
+        dessineVecteur(matProj, test, cam.pos, jaune, etat.image);
         //dessiner les arrêtes des faces:
 
         for(size_t j=0; j<f.points.size(); ++j){
@@ -396,7 +396,7 @@ void constructionCaisse(Objet &obj)
   obj.faces[5].normale[2] = 1;
 }
 
-void AfficherObjet(SDL_Surface *image, Objet obj){
+void AfficherObjet(Etat &etat, Objet obj){
     static Objet objet = obj;
     static Camera cam;              // Caméra
     static Mat matProj;             // Matrice de projection du monde virtuel vers la caméra
@@ -436,13 +436,13 @@ void AfficherObjet(SDL_Surface *image, Objet obj){
     Couleur blanc = {255, 255, 255, 200};
 
     // Dessin de l'objet
-    dessineObjet(obj, matProj, cam, image);
+    dessineObjet(obj, matProj, cam, etat);
 
     //dessin de la caméra
-    dessinePoint(matProj, cam.pos, blanc, image);
+    dessinePoint(matProj, cam.pos, blanc, etat.image);
 
 // Dessin du repère 3D
-    dessineRepere(matProj, image);
+    dessineRepere(matProj, etat.image);
 }
 
 /**
