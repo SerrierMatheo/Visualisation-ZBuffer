@@ -453,7 +453,7 @@ Objet Object3D::Object3DtoObjet(Object3D o) {
 }
 
 //f a plus de 3 sommets
-//TODO à modifier
+//TODO à modifier wtf
 vector<vector<int> > Object3D::polygonToTriangles(F::Face f) {
     vector<vector<int> > vIndex;
 

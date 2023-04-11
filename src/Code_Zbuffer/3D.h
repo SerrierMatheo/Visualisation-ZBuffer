@@ -33,6 +33,8 @@ extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj,SDL_Surface *imag
 ///////////////////////////////////////////
 extern void matriceCamera(Camera &cam, Mat &mat, double echelle);
 
+extern void dessineObjetBase(Objet &obj, Mat &matProj, SDL_Surface *image);
+
 ///////////////////////////////////////////
 // Dessin d'un objet 3D
 ///////////////////////////////////////////
@@ -48,8 +50,12 @@ extern void constructionCaisse(Objet &obj);
 ///////////////////////////////////////////
 extern void Test3D(SDL_Surface *image);
 
-extern void TestConv(SDL_Surface *image, Objet obj);
+extern void AfficherObjet(SDL_Surface *image, Objet obj);
+
+//Vec computeCenter(Objet obj, Face face);
 
 vector<Face> backfaceCulling(Objet obj, Camera cam);
+
+
 
 #endif

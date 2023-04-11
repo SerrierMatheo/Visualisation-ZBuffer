@@ -23,12 +23,13 @@
 ///////////////////////////////////////////
 void AffichagePrincipal (Etat &etat, Objet o)
 {
-    Couleur noir = {255, 255, 255, 0};  // Couleur : noir
+    Couleur blanc = {255, 255, 255, 0};  // Couleur : blanc
+    Couleur noir = {0, 0, 0, 0};  // Couleur : noir
 
     // Affichage seulement s'il n'a pas déjà été fait (pour éviter charge CPU inutile)
     if(!etat.dejaFait){
 
-        ColorieImage(noir, etat.image); // Vidage de l'image
+        ColorieImage(blanc, etat.image); // Vidage de l'image
         etat.dejaFait = true;           // Indique que les dessins sont faits
 
         // Filtrage de l'action courante
@@ -54,7 +55,7 @@ void AffichagePrincipal (Etat &etat, Objet o)
             case CONV:
                 printf("Test conversion\n");
                 //méthode de test sur cubeNorm
-                TestConv(etat.image, o);
+                AfficherObjet(etat.image, o);
                 break;
         }
 
@@ -146,7 +147,7 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    O::Object3D obj("cube.ply");
+    O::Object3D obj("boy.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("cubeNorm2");
     Objet o;

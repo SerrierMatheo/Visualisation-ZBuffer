@@ -44,6 +44,8 @@ namespace F
 
         bool isClockwise(V::Vertex v1, V::Vertex v2, V::Vertex v3);
 
+
+
     private:
         std::vector<int> index;
         unsigned char r;
