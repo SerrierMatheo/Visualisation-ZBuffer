@@ -25,8 +25,9 @@ typedef struct { // Objet complet
   vector<Face> faces;    // Liste des faces de l'objet
 } Objet;
 
-extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj,SDL_Surface *image);
+static const Couleur BLANC = {255, 255, 255, 0};
 
+extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj,SDL_Surface *image);
 
 ///////////////////////////////////////////
 // Calcul de la matrice de la caméra
@@ -56,6 +57,8 @@ extern void AfficherObjet(Etat &etat, Objet obj);
 
 vector<Face> backfaceCulling(Objet obj, Camera cam);
 
+extern void zBuffer(Objet obj, Camera cam, Etat &etat, double** tampon, Couleur** couleurs);
 
+double lenght(double x1, double y1, double z1, double x2, double y2, double z2);
 
 #endif

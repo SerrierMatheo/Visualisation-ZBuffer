@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 #include "3D.h"
 #include "formesSimples.h"
 #include "Segment.h"
@@ -569,6 +569,79 @@ vector<Face> backfaceCulling(Objet obj, Camera cam){
     return visibleFaces;
 }
 
+//TODO à vérifier
+void zBuffer(Objet obj, Camera cam, Etat &etat, double** tampon, Couleur** couleurs){
+
+    //récupérer hauteur et largeur de la fenêtre
+    int height = etat.Hauteur;
+    int width = etat.Largeur;
+
+    //créer la matrice de profondeur Z-Buffer
+    double zBuffer[width][height];
+
+    //créer la matrice des couleurs des pixels
+    Couleur colors[width][height];
+
+    //Initialiser la matrice Z-Buffer à une valeur infinie
+    //Initialiser la matrice de couleur avec du blanc
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            zBuffer[i][j] = std::numeric_limits<double>::infinity();
+            colors[i][j] = BLANC;
+        }
+    }
+
+    // Parcourir tous les triangles de la scène
+    for (int k = 0; k < obj.faces.size(); k++) {
+        //récupérer la normale et le barycentre du triangle
+        Face face = obj.faces[k];
+
+        //recupère la normale de la face précédement calculée
+        Vec normale = face.normale;
+
+        //calcul le centre du triangle
+        Vec barycentre;
+        Vec sommet1 = obj.points[face.points[0]];
+        Vec sommet2 = obj.points[face.points[1]];
+        Vec sommet3 = obj.points[face.points[2]];
+        for (int j = 0; j < 3; ++j) {
+            barycentre.push_back((sommet1[j] + sommet2[j] + sommet3[j]) / 3);
+        }
+
+        // Parcourir tous les pixels de la fenêtre de rendu
+        for (int i = 0; i < width; ++i) {
+            for (int j = 0; j < height; ++j) {
+                //calculer la distance camera-barycentre
+                double distance = lenght(cam.pos[0], cam.pos[1], cam.pos[2], barycentre[0], barycentre[1], barycentre[2]);
+
+                //récupérer la couleur du pixel
+                Couleur couleur = face.c[0];
+
+                // mettre à jour le Z-Buffer & colors si nécéssaire
+                if(distance < zBuffer[i][j]){
+                    zBuffer[i][j] = distance;
+                    colors[i][j] = couleur;
+                }
+            }
+        }
+    }
+
+    // Assigner les valeurs de la matrice Z-Buffer au tableau de pointeurs "res", de même pour couleurs
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            tampon[i][j] = zBuffer[i][j];
+            couleurs[i][j] = colors[i][j];
+        }
+    }
+}
+
+//calcul la distance entre 2 points 3D
+double lenght(double x1, double y1, double z1, double x2, double y2, double z2) {
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    double dz = z2 - z1;
+    return std::sqrt(dx*dx + dy*dy + dz*dz);
+}
 
 
 
