@@ -60,7 +60,17 @@ extern void constructionCaisse(Objet &obj);
 extern void Test3D(SDL_Surface *image);
 
 ///////////////////////////////////////////
-// permet l'affichage d'objet 3D
+// permet l'affichage d'objet 3D Base
+///////////////////////////////////////////
+extern void AfficherObjetBase(Etat &etat, Objet obj);
+
+///////////////////////////////////////////
+// permet l'affichage d'objet 3D avec bbackface culling
+///////////////////////////////////////////
+extern void AfficherObjetVisible(Etat &etat, Objet obj);
+
+///////////////////////////////////////////
+// permet l'affichage d'objet 3D avec Z-Buffer
 ///////////////////////////////////////////
 extern void AfficherObjet(Etat &etat, Objet obj);
 

@@ -52,10 +52,19 @@ void AffichagePrincipal (Etat &etat, Objet o)
                 printf("PROJECTION\n");
                 Test3D(etat.image);
                 break;
-            case CONV:
-                printf("Test conversion\n");
+            case BASE:
+                printf("Affichage de base\n");
                 //méthode de test sur cubeNorm
-                AfficherObjet(etat, o);
+                AfficherObjetBase(etat, o);
+                break;
+            case BACKFACE:
+                printf("Affichage avec backface culling\n");
+                //méthode de test sur cubeNorm
+                AfficherObjetVisible(etat, o);
+                break;
+            case ZBUFFER:
+                printf("Affichage avec ZBuffer\n");
+                AfficherObjet(etat,o);
                 break;
         }
 
@@ -147,7 +156,7 @@ bool GestionEvts(Etat &etat)
 ///////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    O::Object3D obj("cubeNorm.ply");
+    O::Object3D obj("boy.ply");
     std::cout << obj.afficherInfo(1) << std::endl;
     //obj.createFile("cubeNorm2");
     Objet o;
@@ -160,7 +169,7 @@ int main(int argc, char **argv)
     Uint32 dureeIteration = 1000/30; // Durée fixée de chaque itération (selon le framerate)
 
     // Init état global
-    etat.action = CONV;//FORMESSIMPLES;
+    etat.action = BACKFACE;//FORMESSIMPLES;
     etat.dejaFait = false;
     etat.nbActions = NBACTIONS;
 

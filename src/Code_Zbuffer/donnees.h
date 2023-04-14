@@ -7,7 +7,7 @@
 ///////////////////////////////////////////
 // Énumération des différents affichages au cours des TPs successifs
 ///////////////////////////////////////////
-typedef enum {CONV = 0,PROJECTION, FORMESSIMPLES, SEGMENTS, TRIANGLES, NBACTIONS} Action;
+typedef enum {ZBUFFER = 0, BACKFACE, BASE, PROJECTION, FORMESSIMPLES, SEGMENTS, TRIANGLES, NBACTIONS} Action;
 
 ///////////////////////////////////////////
 // Types de couleurs

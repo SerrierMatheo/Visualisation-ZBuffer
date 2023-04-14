@@ -261,7 +261,7 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat)
         //dessineVecteur(matProj, barycentre, f.normale, jaune, etat.image);
         Vec test;
         test.resize(3,0);
-        dessineVecteur(matProj, test, cam.pos, jaune, etat.image);
+        //dessineVecteur(matProj, test, cam.pos, jaune, etat.image);
         //dessiner les arrêtes des faces:
 
         for(size_t j=0; j<f.points.size(); ++j){
@@ -440,6 +440,91 @@ void constructionCaisse(Objet &obj)
   obj.faces[5].points[2] = 5;
   obj.faces[5].points[3] = 1;
   obj.faces[5].normale[2] = 1;
+}
+
+void AfficherObjetBase(Etat &etat, Objet obj){
+    static Objet objet = obj;
+    static Camera cam;              // Caméra
+    static Mat matProj;             // Matrice de projection du monde virtuel vers la caméra
+    static bool objetInit = false; // Indique si l'objet est construit
+    static bool cameraInit = false; // Indique si la caméra est initialisée
+    static double angle = -M_PI/4;  // Position de la caméra autour de la caisse
+    double rayon = 3;               // Rayon du cercle décrit par la caméra
+
+    // Construction de l'objet s'il n'est pas déjà construit
+    if(!objetInit){
+        objetInit = true;
+    }
+
+    // Initialisation de la caméra si elle n'est pas déjà initialisée
+    if(!cameraInit){
+        cam.cible.resize(3, 0);
+        cam.pos.resize(3, 0);
+        cam.pos[2] = 3;
+        cam.echelle = 35; // Ratio entre unité monde et nombre de pixels
+        cameraInit = true;
+    }else{ // Sinon mise à jour de l'angle de rotation de la caméra
+        angle += 0.1;
+    }
+
+    // Mise à jour position X, Y de la caméra
+    cam.pos[0] = (rayon * cos(angle));
+    cam.pos[1] = (rayon * sin(angle));
+
+    // Construction de la matrice de projection
+    matriceMondeVersCamera(cam, matProj);
+
+    cout << std::to_string(cam.pos[0]) +" "+ std::to_string(cam.pos[1]) +" "+ std::to_string(cam.pos[2]) << endl;
+
+    // Dessin de l'objet
+    dessineObjetBase(obj, matProj, etat.image);
+
+    // Dessin du repère 3D
+    dessineRepere(matProj, etat.image);
+}
+
+void AfficherObjetVisible(Etat &etat, Objet obj){
+    static Objet objet = obj;
+    static Camera cam;              // Caméra
+    static Mat matProj;             // Matrice de projection du monde virtuel vers la caméra
+    static bool objetInit = false; // Indique si l'objet est construit
+    static bool cameraInit = false; // Indique si la caméra est initialisée
+    static double angle = -M_PI/4;  // Position de la caméra autour de la caisse
+    double rayon = 3;               // Rayon du cercle décrit par la caméra
+
+    // Construction de l'objet s'il n'est pas déjà construit
+    if(!objetInit){
+        objetInit = true;
+    }
+
+    // Initialisation de la caméra si elle n'est pas déjà initialisée
+    if(!cameraInit){
+        cam.cible.resize(3, 0);
+        cam.pos.resize(3, 0);
+        cam.pos[2] = 3;
+        cam.echelle = 35; // Ratio entre unité monde et nombre de pixels
+        cameraInit = true;
+    }else{ // Sinon mise à jour de l'angle de rotation de la caméra
+        angle += 0.1;
+    }
+
+    // Mise à jour position X, Y de la caméra
+    cam.pos[0] = (rayon * cos(angle));
+    cam.pos[1] = (rayon * sin(angle));
+    /*cam.pos[0] = -100;
+    cam.pos[1] = 100;
+    cam.pos[2] = 200;*/
+
+    // Construction de la matrice de projection
+    matriceMondeVersCamera(cam, matProj);
+
+    cout << std::to_string(cam.pos[0]) +" "+ std::to_string(cam.pos[1]) +" "+ std::to_string(cam.pos[2]) << endl;
+
+    // Dessin de l'objet
+    dessineObjet(obj, matProj, cam, etat);
+
+    // Dessin du repère 3D
+    dessineRepere(matProj, etat.image);
 }
 
 void AfficherObjet(Etat &etat, Objet obj){
