@@ -5,7 +5,9 @@
 #include "Segment.h"
 #include <vector>
 
-void recupererPixelsLigne(PointImage p1, PointImage p2, std::vector<PointImage> listePixelsFace){
+std::vector<PointImage> recupererPixelsLigne(PointImage p1, PointImage p2){
+    std::vector<PointImage> listePixelsFace;
+
     // Calculer le delta en x et en y
     int dx = abs(p2.col - p1.col);
     int dy = abs(p2.lig - p1.lig);
@@ -39,6 +41,7 @@ void recupererPixelsLigne(PointImage p1, PointImage p2, std::vector<PointImage> 
             p1.lig += sy;
         }
     }
+    return listePixelsFace;
 }
 
 void DrawSegment(PointImage p1, PointImage p2, Couleur coul, SDL_Surface *image) {

@@ -43,7 +43,8 @@ void DemiTriangle(PointImage A, PointImage B, PointImage C, Couleur coul, SDL_Su
     }
 }
 
-void recupererPixelsTriangle(PointImage A, PointImage B, PointImage C, vector<PointImage> listePixels){
+vector<PointImage> recupererPixelsTriangle(PointImage A, PointImage B, PointImage C){
+    vector<PointImage> listePixels;
 
     //Met les points dans l'ordre croissant de lig
     PointImage AB, AC;
@@ -66,14 +67,17 @@ void recupererPixelsTriangle(PointImage A, PointImage B, PointImage C, vector<Po
             pAC.col = A.col + AC.col * l / AC.lig;   //Point courant sur AC
             pAC.lig = pAB.lig;
 
-            recupererPixelsLigne(pAB,pAC,listePixels);
+            vector<PointImage> ligne = recupererPixelsLigne(pAB, pAC);
+            listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
             //DrawSegment(pAB, pAC, coul, image); //Dessin du segment horizontal de pAB à pAC
             l = l + senslig;   //Passage à la ligne suivante
         }
     } else {    //traitement du cas particulier où A est sur la même ligne que B
-        recupererPixelsLigne(A,B,listePixels);
+        vector<PointImage> ligne = recupererPixelsLigne(A, B);
+        listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
         //DrawSegment(A, B, coul, image);
     }
+    return listePixels;
 }
 
 ///////////////////////////////////////////
@@ -166,34 +170,42 @@ vector<PointImage> recupererPixels(vector<PointImage> &uv){
         }
     }
 
-    recupererPixelsLigne(milieu, haut, listePixels);
-    recupererPixelsLigne(milieu, bas, listePixels);
-    recupererPixelsLigne(haut, bas, listePixels);
+    vector<PointImage> ligne = recupererPixelsLigne(milieu, haut);
+    listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
 
+    ligne = recupererPixelsLigne(milieu, bas);
+    listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
+
+    ligne = recupererPixelsLigne(haut, bas);
+    listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
 
     //si haut.lig = milieu.lig
     if(haut.lig == milieu.lig){
-        //DemiTriangle(bas, milieu, haut, couls[0], image);
-        recupererPixelsTriangle(bas, milieu, haut,listePixels);
+        ligne = recupererPixelsTriangle(bas, milieu, haut);
+        listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
     }else if(bas.lig == milieu.lig){
-        //DemiTriangle(haut, milieu, bas, couls[0], image);
-        recupererPixelsTriangle(haut, milieu, bas,listePixels);
+        ligne = recupererPixelsTriangle(haut, milieu, bas);
+        listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
     }else if(haut.lig == bas.lig){
         std::swap(bas,milieu);
         if(bas.lig < haut.lig){
             swap(bas,haut);
-            //DemiTriangle(haut,milieu,bas, couls[0], image);
-            recupererPixelsTriangle(haut, milieu, bas,listePixels);
+            ligne = recupererPixelsTriangle(haut, milieu, bas);
+            listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
         }else{
-            //DemiTriangle(bas, milieu, haut, couls[0], image);
-            recupererPixelsTriangle(bas, milieu, haut,listePixels);
+            ligne = recupererPixelsTriangle(bas, milieu, haut);
+            listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
         }
     }else{
         //DemiTriangle(haut, milieu, bas, couls[0], image);
-        recupererPixelsTriangle(haut, milieu, bas,listePixels);
+        ligne = recupererPixelsTriangle(haut, milieu, bas);
+        listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
         //DemiTriangle(bas, milieu, haut, couls[0], image);
-        recupererPixelsTriangle(bas, milieu, haut,listePixels);
+        ligne = recupererPixelsTriangle(bas, milieu, haut);
+        listePixels.insert(listePixels.end(), ligne.begin(), ligne.end());
     }
+
+    return listePixels;
 }
 
 ///////////////////////////////////////////

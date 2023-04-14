@@ -79,6 +79,8 @@ vector<Face> backfaceCulling(Objet obj, Camera cam);
 ///////////////////////////////////////////
 void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, Couleur** couleurs);
 
+
+
 ///////////////////////////////////////////
 // calcul la distance entre 2 points 3D
 ///////////////////////////////////////////

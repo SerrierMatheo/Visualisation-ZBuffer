@@ -635,7 +635,7 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
         for (int j = 0; j < height; j++) {
             zBuffer[i][j] = -std::numeric_limits<double>::infinity();
             colors[i][j] = BLANC;
-            cout << "i : " +std::to_string(i) + "; j : " + std::to_string(j) << endl;
+            //cout << "i : " +std::to_string(i) + "; j : " + std::to_string(j) << endl;
         }
     }
 
@@ -656,6 +656,7 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
         PointImage C3 = face.uv[2];
 
         //récuperer les pixels de la face
+        vector<PointImage> listePixels = recupererPixels(face.uv);
 
         //interpolation
 

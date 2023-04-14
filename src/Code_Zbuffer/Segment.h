@@ -11,7 +11,7 @@
 
 extern void DrawSegment(PointImage p1, PointImage p2, Couleur coul, SDL_Surface *image);
 
-extern void recupererPixelsLigne(PointImage p1, PointImage p2, std::vector<PointImage> listePixelsFace);
+extern std::vector<PointImage> recupererPixelsLigne(PointImage p1, PointImage p2);
 
 void TestSegment(SDL_Surface *image);
 

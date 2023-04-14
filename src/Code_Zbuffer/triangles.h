@@ -7,12 +7,12 @@
 
 using namespace std;
 
-void recupererPixelsTriangle(PointImage A, PointImage B, PointImage C, vector<PointImage> listePixels);
+vector<PointImage> recupererPixelsTriangle(PointImage A, PointImage B, PointImage C);
 
 ///////////////////////////////////////////
 // Dessin d'un triangle défini par les pts
 // et les couleurs spécifiés
-// Arrêt au sommet centrale
+// Arrêt au sommet central
 ///////////////////////////////////////////
 extern void DemiTriangle(PointImage A, PointImage B, PointImage C, Couleur coul, SDL_Surface *image);
 
