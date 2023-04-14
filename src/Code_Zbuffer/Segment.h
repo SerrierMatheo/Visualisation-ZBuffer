@@ -7,8 +7,11 @@
 
 #include "donnees.h"
 #include "base.h"
+#include <vector>
 
 extern void DrawSegment(PointImage p1, PointImage p2, Couleur coul, SDL_Surface *image);
+
+extern void recupererPixelsLigne(PointImage p1, PointImage p2, std::vector<PointImage> listePixelsFace);
 
 void TestSegment(SDL_Surface *image);
 

@@ -256,12 +256,9 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat)
         Vec sommet2 = obj.points[f.points[1]];
         Vec sommet3 = obj.points[f.points[2]];
 
-        //calcul le barycentre de la face courante
-        for (int j = 0; j < 3; ++j) {
-            barycentre.push_back((sommet1[j] + sommet2[j] + sommet3[j]) / 3);
-        }
+        barycentre = computeBarycenter(sommet1, sommet2, sommet3);
 
-        //dessineVecteur(matProj, barycentre, f.normale, jaune, image);
+        //dessineVecteur(matProj, barycentre, f.normale, jaune, etat.image);
         Vec test;
         test.resize(3,0);
         dessineVecteur(matProj, test, cam.pos, jaune, etat.image);
@@ -273,6 +270,60 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat)
             // Coloriage du sommet courant avec un point de rayon 5 pixels
             //Disque(lstPts[indA], 1, rouge, image);
             //DrawSegment(lstPts[indA],lstPts[indB],rouge, image);
+        }
+    }
+}
+
+//TODO à compléter
+void dessineObjetZbuffer(Objet &obj, Mat &matProj, Camera &cam, Etat &etat){
+    Vec pt;                    // Point projeté
+    vector<PointImage> lstPts; // Liste des points dans l'image
+    Couleur blanc = {255, 255, 255, 200}; // Couleurs pour les traits et points
+    Couleur jaune = {255, 255, 0, 0};
+
+    // Projection des sommets de l'objet
+    pt.resize(4);
+    lstPts.resize(obj.points.size());
+
+    for(size_t i=0; i<obj.points.size(); ++i){ // Parcours des points
+        // Projection du point dans le repère caméra
+        projection(matProj, obj.points[i], pt);
+        positionDansImage(pt, lstPts[i], etat.image);
+    }
+
+    // project 3D point and fill uv vector
+    vector<PointImage> vecPtI = ProjectObjet(obj, matProj, etat.image);
+    for(size_t it=0; it<obj.faces.size(); it++) {
+        Face &f = obj.faces.at(it);
+        for(size_t it_bis = 0; it_bis< f.points.size(); it_bis++) {
+            f.uv.push_back(vecPtI.at(f.points.at(it_bis)));
+        }
+    }
+    //récupérer les faces visibles via backface culling
+    vector<Face> visibleFaces;
+    visibleFaces = backfaceCulling(obj, cam);
+
+    //TODO ajouter zbuffer et dessin de la scène
+
+    //créer la matrice de profondeur Z-Buffer sur le tas
+    double** zbuffer = new double*[etat.Largeur];
+    for(int i = 0; i < etat.Largeur; i++) {
+        zbuffer[i] = new double[etat.Hauteur];
+    }
+
+    //créer la matrice des couleurs des pixels sur le tas
+    Couleur** couls = new Couleur*[etat.Largeur];
+    for(int i = 0; i < etat.Largeur; i++) {
+        couls[i] = new Couleur[etat.Hauteur];
+    }
+
+    zBuffer(obj, cam, etat.Hauteur, etat.Largeur, zbuffer, couls);
+
+    for (int i = 0; i < etat.Largeur; ++i) {
+        for (int j = 0; j < etat.Hauteur; ++j) {
+            ColoriePixel(i,j,couls[i][j],etat.image);
+
+            cout << "ok" << endl;
         }
     }
 }
@@ -433,16 +484,16 @@ void AfficherObjet(Etat &etat, Objet obj){
 
     cout << std::to_string(cam.pos[0]) +" "+ std::to_string(cam.pos[1]) +" "+ std::to_string(cam.pos[2]) << endl;
 
-    Couleur blanc = {255, 255, 255, 200};
-
     // Dessin de l'objet
-    dessineObjet(obj, matProj, cam, etat);
+    //dessineObjet(obj, matProj, cam, etat);
 
     //dessin de la caméra
-    dessinePoint(matProj, cam.pos, blanc, etat.image);
+    //dessinePoint(matProj, cam.pos, BLANC, etat.image);
 
 // Dessin du repère 3D
-    dessineRepere(matProj, etat.image);
+    //dessineRepere(matProj, etat.image);
+
+    dessineObjetZbuffer(obj,matProj,cam,etat);
 }
 
 /**
@@ -503,22 +554,6 @@ vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image) {
     return uv;
 }
 
-/*
-Vec computeCenter(Objet obj, Face f){
-    //initialise barycentre
-    Vec center;
-    Vec sommet1 = obj.points[f.points[0]];
-    Vec sommet2 = obj.points[f.points[1]];
-    Vec sommet3 = obj.points[f.points[2]];
-
-    //calcul le barycentre de la face courante
-    for (int j = 0; j < 3; ++j) {
-        center.push_back((sommet1[j] + sommet2[j] + sommet3[j]) / 3);
-    }
-
-    return center;
-}*/
-
 /**
  * backfaceCulling :
 method implementing the backface culling algorithm allowing to recover only the faces of the object which are visible from the point of view of the camera
@@ -544,9 +579,7 @@ vector<Face> backfaceCulling(Objet obj, Camera cam){
         Vec sommet2 = obj.points[face.points[1]];
         Vec sommet3 = obj.points[face.points[2]];
 
-        for (int j = 0; j < 3; ++j) {
-            barycentre.push_back((sommet1[j] + sommet2[j] + sommet3[j]) /3);
-        }
+        barycentre = computeBarycenter(sommet1, sommet2, sommet3);
 
         //Calculer le vecteur de la caméra en direction de la face
         Vec cameraVector;
@@ -569,64 +602,69 @@ vector<Face> backfaceCulling(Objet obj, Camera cam){
     return visibleFaces;
 }
 
-//TODO à vérifier
-void zBuffer(Objet obj, Camera cam, Etat &etat, double** tampon, Couleur** couleurs){
+//TODO a completer
+/**
+ * zBuffer : compute and fill the Z-Buffer of a 3D scene
+ * @param obj an 3D object
+ * @param cam a camera
+ * @param etat an Etat
+ * @param tampon a table of double
+ * @param couleurs a table of colors
+ */
+void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, Couleur** couleurs){
 
     //récupérer hauteur et largeur de la fenêtre
-    int height = etat.Hauteur;
-    int width = etat.Largeur;
+    int height = hauteur;
+    int width = largeur;
 
-    //créer la matrice de profondeur Z-Buffer
-    double zBuffer[width][height];
+    //créer la matrice de profondeur Z-Buffer sur le tas
+    double** zBuffer = new double*[width];
+    for(int i = 0; i < width; i++) {
+        zBuffer[i] = new double[height];
+    }
 
-    //créer la matrice des couleurs des pixels
-    Couleur colors[width][height];
+    //créer la matrice des couleurs des pixels sur le tas
+    Couleur** colors = new Couleur*[width];
+    for(int i = 0; i < width; i++) {
+        colors[i] = new Couleur[height];
+    }
 
-    //Initialiser la matrice Z-Buffer à une valeur infinie
-    //Initialiser la matrice de couleur avec du blanc
+    //Initialiser la matrice Z-Buffer à -∞
+    //Initialiser la matrice de couleur avec la couleur de fond
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            zBuffer[i][j] = std::numeric_limits<double>::infinity();
+            zBuffer[i][j] = -std::numeric_limits<double>::infinity();
             colors[i][j] = BLANC;
+            cout << "i : " +std::to_string(i) + "; j : " + std::to_string(j) << endl;
         }
     }
 
-    // Parcourir tous les triangles de la scène
-    for (int k = 0; k < obj.faces.size(); k++) {
-        //récupérer la normale et le barycentre du triangle
-        Face face = obj.faces[k];
 
-        //recupère la normale de la face précédement calculée
-        Vec normale = face.normale;
+    //parcours des faces de l'objet
+    for (int i = 0; i<obj.faces.size() ; ++i) {
+        //récupère la face courante
+        Face face = obj.faces[i];
 
-        //calcul le centre du triangle
-        Vec barycentre;
-        Vec sommet1 = obj.points[face.points[0]];
-        Vec sommet2 = obj.points[face.points[1]];
-        Vec sommet3 = obj.points[face.points[2]];
-        for (int j = 0; j < 3; ++j) {
-            barycentre.push_back((sommet1[j] + sommet2[j] + sommet3[j]) / 3);
-        }
+        //récupère les coordonnées 3D des 3 sommets
+        Vec A = obj.points[face.points[0]];
+        Vec B = obj.points[face.points[1]];
+        Vec C = obj.points[face.points[2]];
 
-        // Parcourir tous les pixels de la fenêtre de rendu
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                //calculer la distance camera-barycentre
-                double distance = lenght(cam.pos[0], cam.pos[1], cam.pos[2], barycentre[0], barycentre[1], barycentre[2]);
+        //récupère les PointImage correspondant aux sommets de la face
+        PointImage A2 = face.uv[0];
+        PointImage B2 = face.uv[1];
+        PointImage C3 = face.uv[2];
 
-                //récupérer la couleur du pixel
-                Couleur couleur = face.c[0];
+        //récuperer les pixels de la face
 
-                // mettre à jour le Z-Buffer & colors si nécéssaire
-                if(distance < zBuffer[i][j]){
-                    zBuffer[i][j] = distance;
-                    colors[i][j] = couleur;
-                }
-            }
-        }
+        //interpolation
+
+        //calcul distance
+
+        //maj zbuffer et colors
     }
 
-    // Assigner les valeurs de la matrice Z-Buffer au tableau de pointeurs "res", de même pour couleurs
+    // Assigner les valeurs de la matrice Z-Buffer au tableau de pointeurs "tampon", de même pour couleurs
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             tampon[i][j] = zBuffer[i][j];
@@ -635,14 +673,34 @@ void zBuffer(Objet obj, Camera cam, Etat &etat, double** tampon, Couleur** coule
     }
 }
 
+/**
+ * computeBarycenter : compute the face barycenter
+ * @param vertexA a vector<double>
+ * @param vertexB a vector<double>
+ * @param vertexC a vector<double>
+ * @return a vector<double> : the face barycenter
+ */
+vector<double> computeBarycenter(vector<double> vertexA, vector<double> vertexB, vector<double> vertexC) {
+    // Calcul des coordonnées du barycentre
+    double x = (vertexA[0] + vertexB[0] + vertexC[0]) / 3.0;
+    double y = (vertexA[1] + vertexB[1] + vertexC[1]) / 3.0;
+    double z = (vertexA[2] + vertexB[2] + vertexC[2]) / 3.0;
+
+    // Création d'un vecteur pour stocker les coordonnées du barycentre
+    vector<double> barycenter;
+    barycenter.push_back(x);
+    barycenter.push_back(y);
+    barycenter.push_back(z);
+
+    return barycenter;
+}
+
 //calcul la distance entre 2 points 3D
-double lenght(double x1, double y1, double z1, double x2, double y2, double z2) {
+double length(double x1, double y1, double z1, double x2, double y2, double z2) {
     double dx = x2 - x1;
     double dy = y2 - y1;
     double dz = z2 - z1;
     return std::sqrt(dx*dx + dy*dy + dz*dz);
 }
-
-
 
 

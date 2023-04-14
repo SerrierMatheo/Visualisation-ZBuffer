@@ -7,6 +7,8 @@
 
 using namespace std;
 
+void recupererPixelsTriangle(PointImage A, PointImage B, PointImage C, vector<PointImage> listePixels);
+
 ///////////////////////////////////////////
 // Dessin d'un triangle défini par les pts
 // et les couleurs spécifiés
@@ -20,11 +22,7 @@ extern void DemiTriangle(PointImage A, PointImage B, PointImage C, Couleur coul,
 ///////////////////////////////////////////
 extern void Triangle(vector<PointImage> &pts, vector<Couleur> &couls, SDL_Surface *image);
 
-///////////////////////////////////////////
-// Dessin d'un triangle défini par les pts
-// et les sommets de texture spécifiés
-///////////////////////////////////////////
-extern void Triangle(vector<PointImage> &pts, vector<PointImage> &coords, SDL_Surface *tex, SDL_Surface *image);
+extern vector<PointImage> recupererPixels(vector<PointImage> &uv);
 
 ///////////////////////////////////////////
 // Test de la fonction de dessin des courbes de Bézier

@@ -27,19 +27,27 @@ typedef struct { // Objet complet
 
 static const Couleur BLANC = {255, 255, 255, 0};
 
-extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj,SDL_Surface *image);
+extern vector<PointImage> ProjectObjet(Objet obj, Mat &matProj, SDL_Surface *image);
 
 ///////////////////////////////////////////
 // Calcul de la matrice de la caméra
 ///////////////////////////////////////////
 extern void matriceCamera(Camera &cam, Mat &mat, double echelle);
 
+///////////////////////////////////////////
+// Dessin (toutes les faces) d'un objet 3D
+///////////////////////////////////////////
 extern void dessineObjetBase(Objet &obj, Mat &matProj, SDL_Surface *image);
 
 ///////////////////////////////////////////
-// Dessin d'un objet 3D
+// Dessin (uniquement face visible) d'un objet 3D
 ///////////////////////////////////////////
-extern void dessineObjet(Objet &obj, Camera &cam, Etat &etat);
+extern void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat);
+
+///////////////////////////////////////////
+// Dessin (à l'aide du ZBuffer) d'un objet 3D
+///////////////////////////////////////////
+extern void dessineObjetZbuffer(Objet &obj, Mat &matProj, Camera &cam, Etat &etat);
 
 ///////////////////////////////////////////
 // Construction d'une caisse 3D
@@ -51,14 +59,29 @@ extern void constructionCaisse(Objet &obj);
 ///////////////////////////////////////////
 extern void Test3D(SDL_Surface *image);
 
+///////////////////////////////////////////
+// permet l'affichage d'objet 3D
+///////////////////////////////////////////
 extern void AfficherObjet(Etat &etat, Objet obj);
 
-//Vec computeCenter(Objet obj, Face face);
+///////////////////////////////////////////
+// calcul le barycentre d'une face triangulaire
+///////////////////////////////////////////
+vector<double> computeBarycenter(vector<double> vertexA, vector<double> vertexB, vector<double> vertexC);
 
+///////////////////////////////////////////
+// implémente le backface culling
+///////////////////////////////////////////
 vector<Face> backfaceCulling(Objet obj, Camera cam);
 
-extern void zBuffer(Objet obj, Camera cam, Etat &etat, double** tampon, Couleur** couleurs);
+///////////////////////////////////////////
+// Calcul et rempli le zbuffer et les couleurs des pixels d'une scène
+///////////////////////////////////////////
+void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, Couleur** couleurs);
 
-double lenght(double x1, double y1, double z1, double x2, double y2, double z2);
+///////////////////////////////////////////
+// calcul la distance entre 2 points 3D
+///////////////////////////////////////////
+double length(double x1, double y1, double z1, double x2, double y2, double z2);
 
 #endif

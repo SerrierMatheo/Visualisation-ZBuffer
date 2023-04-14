@@ -16,6 +16,7 @@ inline Couleur CouleurPointImage (PointImage pi, SDL_Surface *image)
 // Coloriage du pixel (x,y) avec la couleur coul
 ///////////////////////////////////////////
 extern void ColoriePixel (int x, int y, Couleur coul, SDL_Surface *image);
+
 inline void ColoriePointImage (PointImage pi, Couleur coul, SDL_Surface *image)
 {
   ColoriePixel(pi.col, pi.lig, coul, image);

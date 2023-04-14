@@ -6,6 +6,8 @@
 #include <iostream>
 
 
+
+
 ///////////////////////////////////////////
 // Dessin d'un triangle défini par les pts
 // et les couleurs spécifiés
@@ -38,6 +40,39 @@ void DemiTriangle(PointImage A, PointImage B, PointImage C, Couleur coul, SDL_Su
         }
     } else {    //traitement du cas particulier où A est sur la même ligne que B
         DrawSegment(A, B, coul, image);
+    }
+}
+
+void recupererPixelsTriangle(PointImage A, PointImage B, PointImage C, vector<PointImage> listePixels){
+
+    //Met les points dans l'ordre croissant de lig
+    PointImage AB, AC;
+    AB.col = B.col - A.col;
+    AB.lig = B.lig - A.lig;
+    AC.col = C.col - A.col;
+    AC.lig = C.lig - A.lig;
+
+    if (AB.lig != 0){   //traitement du cas général où A n'est pas sur la même ligne que B
+        int senslig = 1;    //Détermination du sens de parcours des lignes
+        if (A.lig > B.lig){
+            senslig = -1;
+        }
+
+        int l = 0;
+        while(l != AB.lig+senslig){
+            PointImage pAB,pAC;
+            pAB.col = A.col + AB.col * l / AB.lig;   //Point courant sur AB
+            pAB.lig = A.lig + l;
+            pAC.col = A.col + AC.col * l / AC.lig;   //Point courant sur AC
+            pAC.lig = pAB.lig;
+
+            recupererPixelsLigne(pAB,pAC,listePixels);
+            //DrawSegment(pAB, pAC, coul, image); //Dessin du segment horizontal de pAB à pAC
+            l = l + senslig;   //Passage à la ligne suivante
+        }
+    } else {    //traitement du cas particulier où A est sur la même ligne que B
+        recupererPixelsLigne(A,B,listePixels);
+        //DrawSegment(A, B, coul, image);
     }
 }
 
@@ -100,13 +135,65 @@ void Triangle(vector<PointImage> &pts, vector<Couleur> &couls, SDL_Surface *imag
     }
 }
 
-///////////////////////////////////////////
-// Dessin d'un triangle défini par les pts
-// et les sommets de texture spécifiés
-///////////////////////////////////////////
-void Triangle(vector<PointImage> &pts, vector<PointImage> &coords, SDL_Surface *tex, SDL_Surface *image)
-{
-  // À COMPLÉTER !!
+vector<PointImage> recupererPixels(vector<PointImage> &uv){
+    vector<PointImage> listePixels;
+
+    PointImage haut = uv[0];
+    PointImage bas = uv[1];
+    PointImage milieu = uv[2];
+
+    bool sort = true;
+    //traiter le cas ou un côté est horizontal
+    if((haut.lig == milieu.lig) || (haut.lig == bas.lig) || (milieu.lig == bas.lig)){
+        sort = false;
+    }
+
+    while (sort){
+        if(((haut.lig < milieu.lig) && (haut.lig < bas.lig)) && ((bas.lig > haut.lig) && (bas.lig > milieu.lig)))
+            break;
+        if ((haut.lig > milieu.lig) && (haut.lig > bas.lig)) {
+            // haut.lig est le plus grand
+            std::swap(haut.lig, bas.lig);
+            std::swap(haut.col, bas.col);
+        } else if ((bas.lig < haut.lig) && (bas.lig < milieu.lig)) {
+            // bas.lig est le plus petit
+            std::swap(haut.lig, bas.lig);
+            std::swap(haut.col, bas.col);
+        } else {
+            // milieu.lig est le milieu
+            std::swap(haut.lig, milieu.lig);
+            std::swap(haut.col, milieu.col);
+        }
+    }
+
+    recupererPixelsLigne(milieu, haut, listePixels);
+    recupererPixelsLigne(milieu, bas, listePixels);
+    recupererPixelsLigne(haut, bas, listePixels);
+
+
+    //si haut.lig = milieu.lig
+    if(haut.lig == milieu.lig){
+        //DemiTriangle(bas, milieu, haut, couls[0], image);
+        recupererPixelsTriangle(bas, milieu, haut,listePixels);
+    }else if(bas.lig == milieu.lig){
+        //DemiTriangle(haut, milieu, bas, couls[0], image);
+        recupererPixelsTriangle(haut, milieu, bas,listePixels);
+    }else if(haut.lig == bas.lig){
+        std::swap(bas,milieu);
+        if(bas.lig < haut.lig){
+            swap(bas,haut);
+            //DemiTriangle(haut,milieu,bas, couls[0], image);
+            recupererPixelsTriangle(haut, milieu, bas,listePixels);
+        }else{
+            //DemiTriangle(bas, milieu, haut, couls[0], image);
+            recupererPixelsTriangle(bas, milieu, haut,listePixels);
+        }
+    }else{
+        //DemiTriangle(haut, milieu, bas, couls[0], image);
+        recupererPixelsTriangle(haut, milieu, bas,listePixels);
+        //DemiTriangle(bas, milieu, haut, couls[0], image);
+        recupererPixelsTriangle(bas, milieu, haut,listePixels);
+    }
 }
 
 ///////////////////////////////////////////
