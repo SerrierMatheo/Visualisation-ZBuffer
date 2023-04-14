@@ -318,6 +318,7 @@ V::Vertex Object3D::cross(V::Vertex v1, V::Vertex v2) {
 }
 
 //normalise la normale obtenue grâce au produit vectoriel des representant de la face
+//TODO NORMALISER
 void Object3D::normalize(V::Vertex w) {
     double norm = sqrt(w.getX()*w.getX() + w.getY()*w.getY() + w.getZ()*w.getZ());
 

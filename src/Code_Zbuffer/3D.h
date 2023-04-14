@@ -79,7 +79,10 @@ vector<Face> backfaceCulling(Objet obj, Camera cam);
 ///////////////////////////////////////////
 void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, Couleur** couleurs);
 
-
+///////////////////////////////////////////
+// permet de récupérer les coords 3D d'un pixel P
+///////////////////////////////////////////
+Mat interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p);
 
 ///////////////////////////////////////////
 // calcul la distance entre 2 points 3D

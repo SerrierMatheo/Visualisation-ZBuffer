@@ -322,8 +322,6 @@ void dessineObjetZbuffer(Objet &obj, Mat &matProj, Camera &cam, Etat &etat){
     for (int i = 0; i < etat.Largeur; ++i) {
         for (int j = 0; j < etat.Hauteur; ++j) {
             ColoriePixel(i,j,couls[i][j],etat.image);
-
-            cout << "ok" << endl;
         }
     }
 }
@@ -639,30 +637,43 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
         }
     }
 
+    //récupérer les faces visibles via backface culling
+    vector<Face> visibleFaces;
+    visibleFaces = backfaceCulling(obj, cam);
 
     //parcours des faces de l'objet
-    for (int i = 0; i<obj.faces.size() ; ++i) {
+    for (int i = 0; i<visibleFaces.size() ; ++i) {
         //récupère la face courante
-        Face face = obj.faces[i];
+        Face face = visibleFaces[i];
 
         //récupère les coordonnées 3D des 3 sommets
         Vec A = obj.points[face.points[0]];
         Vec B = obj.points[face.points[1]];
         Vec C = obj.points[face.points[2]];
 
+        vector<Vec> sommets;
+        sommets.push_back(A);
+        sommets.push_back(B);
+        sommets.push_back(C);
+        /*
         //récupère les PointImage correspondant aux sommets de la face
         PointImage A2 = face.uv[0];
         PointImage B2 = face.uv[1];
-        PointImage C3 = face.uv[2];
+        PointImage C3 = face.uv[2];*/
 
-        //récuperer les pixels de la face
+        //récupérer les pixels de la face
         vector<PointImage> listePixels = recupererPixels(face.uv);
 
-        //interpolation
+        for (int j = 0; j < listePixels.size(); ++j) {
+            //interpolation
+            //récupère la liste des coordonnées 3D des pixels de la face courante
+            Mat listePoints = interpolation(face.uv, sommets, listePixels[j]);
+        }
+
 
         //calcul distance
 
-        //maj zbuffer et colors
+        //maj ZBuffer et colors
     }
 
     // Assigner les valeurs de la matrice Z-Buffer au tableau de pointeurs "tampon", de même pour couleurs
@@ -673,6 +684,43 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
         }
     }
 }
+
+
+Mat interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p){
+
+    PointImage A2 = uv[0];
+    PointImage B2 = uv[1];
+    PointImage C2 = uv[2];
+
+    PointImage A2P, B2C2;
+    A2P.lig = p.lig - A2.lig;
+    A2P.col = p.col - A2.col;
+    B2C2.lig = C2.lig - B2.lig;
+    B2C2.col = C2.col - B2.col;
+
+    //trouver l'intersection de A2P et B2C2
+    //On cherche pour A2P y=mx+b
+    //Cherchons m (la pente)
+    double m = (B2C2.lig - A2P.lig)/(B2C2.col - A2P.col);
+    //Cherchons b (origine)
+    double b = A2P.lig - m*A2P.col;
+
+    double m2 = (A2P.lig - B2C2.lig)/(A2P.col - B2C2.col);
+    double b2 = B2C2.lig - m2*B2C2.col;
+
+    //trouvons x
+    double x = (b2-b)/(m2-m);
+    double y = (m*x)+b;
+
+    //On trouve D2
+    PointImage D2;
+    D2.col = x;
+    D2.lig = y;
+
+    //cherchons alpha et beta
+
+}
+
 
 /**
  * computeBarycenter : compute the face barycenter
