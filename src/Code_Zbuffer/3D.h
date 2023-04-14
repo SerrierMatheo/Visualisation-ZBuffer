@@ -82,7 +82,9 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
 ///////////////////////////////////////////
 // permet de récupérer les coords 3D d'un pixel P
 ///////////////////////////////////////////
-Mat interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p);
+Vec interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p);
+
+void normaliser2D(Vec w);
 
 ///////////////////////////////////////////
 // calcul la distance entre 2 points 3D

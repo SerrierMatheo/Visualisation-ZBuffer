@@ -274,7 +274,6 @@ void dessineObjet(Objet &obj, Mat &matProj, Camera &cam, Etat &etat)
     }
 }
 
-//TODO à compléter
 void dessineObjetZbuffer(Objet &obj, Mat &matProj, Camera &cam, Etat &etat){
     Vec pt;                    // Point projeté
     vector<PointImage> lstPts; // Liste des points dans l'image
@@ -302,8 +301,6 @@ void dessineObjetZbuffer(Objet &obj, Mat &matProj, Camera &cam, Etat &etat){
     //récupérer les faces visibles via backface culling
     vector<Face> visibleFaces;
     visibleFaces = backfaceCulling(obj, cam);
-
-    //TODO ajouter zbuffer et dessin de la scène
 
     //créer la matrice de profondeur Z-Buffer sur le tas
     double** zbuffer = new double*[etat.Largeur];
@@ -663,17 +660,26 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
 
         //récupérer les pixels de la face
         vector<PointImage> listePixels = recupererPixels(face.uv);
-
+        Mat listePoints;
         for (int j = 0; j < listePixels.size(); ++j) {
             //interpolation
             //récupère la liste des coordonnées 3D des pixels de la face courante
-            Mat listePoints = interpolation(face.uv, sommets, listePixels[j]);
+            //un point 3D pour 1 pixel
+             listePoints.push_back(interpolation(face.uv,sommets,listePixels[j]));
         }
 
-
         //calcul distance
+        for (int j = 0; j < listePixels.size(); ++j) {
+            Vec pts3D = listePoints[j];
+            //calculer profondeur cam-listePoints[j]
+            double profondeur = length(cam.pos[0],cam.pos[1],cam.pos[2],pts3D[0],pts3D[1],pts3D[2]);
 
-        //maj ZBuffer et colors
+            //si profondeur < valeur stockée, on remplace par profondeur et colors reçoit la couleur de la face
+            if(zBuffer[listePixels[j].col][listePixels[j].lig] < profondeur){
+                zBuffer[listePixels[j].col][listePixels[j].lig] = profondeur;
+                colors[listePixels[j].col][listePixels[j].lig] = face.c[0];
+            }
+        }
     }
 
     // Assigner les valeurs de la matrice Z-Buffer au tableau de pointeurs "tampon", de même pour couleurs
@@ -685,8 +691,10 @@ void zBuffer(Objet obj, Camera cam, int hauteur, int largeur, double** tampon, C
     }
 }
 
+//TODO à corriger
+Vec interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p){
 
-Mat interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p){
+    Vec pts3D;
 
     PointImage A2 = uv[0];
     PointImage B2 = uv[1];
@@ -701,24 +709,80 @@ Mat interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p){
     //trouver l'intersection de A2P et B2C2
     //On cherche pour A2P y=mx+b
     //Cherchons m (la pente)
-    double m = (B2C2.lig - A2P.lig)/(B2C2.col - A2P.col);
+    double m;
+    if (B2C2.col - A2P.col == 0) {
+        m = 1e9; // ou -1e9 si B2C2.lig - A2P.lig < 0
+    } else {
+        m = (B2C2.lig - A2P.lig)/(B2C2.col - A2P.col);
+    }
     //Cherchons b (origine)
     double b = A2P.lig - m*A2P.col;
 
-    double m2 = (A2P.lig - B2C2.lig)/(A2P.col - B2C2.col);
+    double m2;
+    if (A2P.col - B2C2.col == 0) {
+        m2 = 1e9; // ou -1e9 si B2C2.lig - A2P.lig < 0
+    } else {
+        m2 = (A2P.lig - B2C2.lig)/(A2P.col - B2C2.col);
+    }
     double b2 = B2C2.lig - m2*B2C2.col;
 
     //trouvons x
     double x = (b2-b)/(m2-m);
     double y = (m*x)+b;
 
-    //On trouve D2
+    //On trouve D2 l'intersection de A2P et B2C2
     PointImage D2;
     D2.col = x;
     D2.lig = y;
 
     //cherchons alpha et beta
+    double beta;
+    double ODminusOBx = D2.col - B2.col;
+    double ODminusOBy = D2.lig - B2.lig;
+    Vec num;
+    num.push_back(ODminusOBx);
+    num.push_back(ODminusOBy);
+    normaliser2D(num);
 
+    double B2C2x = C2.col - B2.col;
+    double B2C2y = C2.lig - B2.lig;
+    Vec denum;
+    denum.push_back(B2C2x);
+    denum.push_back(B2C2y);
+    normaliser2D(denum);
+
+    double res1 = num[0] / denum[0];
+    double res2 = num[1] / denum[1];
+    beta = res1 / res2;
+
+    double alpha;
+    double OPminusOAx = p.col - A2.col;
+    double OPminusOAy = p.lig - A2.lig;
+
+    num.push_back(OPminusOAx);
+    num.push_back(OPminusOAy);
+    normaliser2D(num);
+
+    double A2px = p.col - A2.col;
+    double A2py = p.lig - A2.lig;
+
+    denum.push_back(A2px);
+    denum.push_back(A2py);
+    normaliser2D(denum);
+
+    res1 = num[2] / denum[2];
+    res2 = num[3] / denum[3];
+    alpha = res1 / res2;
+
+    //Trouvons les coordonnées de p3D et D
+
+    return pts3D;
+}
+
+void normaliser2D(Vec w){
+    double norm = sqrt(w[0]*w[0] + w[1]*w[1]);
+    w[0]= w[0]/norm;
+    w[1]= w[1]/norm;
 }
 
 
