@@ -781,85 +781,16 @@ Vec interpolation(vector<PointImage> uv, vector<Vec> sommets, PointImage p){
 
     Vec pts3D;
 
-    PointImage A2 = uv[0];
-    PointImage B2 = uv[1];
-    PointImage C2 = uv[2];
+    PointImage A = uv[0];
+    PointImage B = uv[1];
+    PointImage C = uv[2];
 
-    PointImage A2P, B2C2;
-    A2P.lig = p.lig - A2.lig;
-    A2P.col = p.col - A2.col;
-    B2C2.lig = C2.lig - B2.lig;
-    B2C2.col = C2.col - B2.col;
+    PointImage AP, BC;
+    AP.lig = p.lig - A.lig;
+    AP.col = p.col - A.col;
+    BC.lig = C.lig - B.lig;
+    BC.col = C.col - B.col;
 
-    //trouver l'intersection de A2P et B2C2
-    //On cherche pour A2P y=mx+b
-    //Cherchons m (la pente)
-    double m;
-    if (B2C2.col - A2P.col == 0) {
-        m = 1e9; // ou -1e9 si B2C2.lig - A2P.lig < 0
-    } else {
-        m = (B2C2.lig - A2P.lig)/(B2C2.col - A2P.col);
-    }
-    //Cherchons b (origine)
-    double b = A2P.lig - m*A2P.col;
-
-    double m2;
-    if (A2P.col - B2C2.col == 0) {
-        m2 = 1e9; // ou -1e9 si B2C2.lig - A2P.lig < 0
-    } else {
-        m2 = (A2P.lig - B2C2.lig)/(A2P.col - B2C2.col);
-    }
-    double b2 = B2C2.lig - m2*B2C2.col;
-
-    //trouvons x
-    double x = (b2-b)/(m2-m);
-    double y = (m*x)+b;
-
-    //On trouve D2 l'intersection de A2P et B2C2
-    PointImage D2;
-    D2.col = x;
-    D2.lig = y;
-
-    //cherchons alpha et beta
-    double beta;
-    double ODminusOBx = D2.col - B2.col;
-    double ODminusOBy = D2.lig - B2.lig;
-    Vec num;
-    num.push_back(ODminusOBx);
-    num.push_back(ODminusOBy);
-    normaliser2D(num);
-
-    double B2C2x = C2.col - B2.col;
-    double B2C2y = C2.lig - B2.lig;
-    Vec denum;
-    denum.push_back(B2C2x);
-    denum.push_back(B2C2y);
-    normaliser2D(denum);
-
-    double res1 = num[0] / denum[0];
-    double res2 = num[1] / denum[1];
-    beta = res1 / res2;
-
-    double alpha;
-    double OPminusOAx = p.col - A2.col;
-    double OPminusOAy = p.lig - A2.lig;
-
-    num.push_back(OPminusOAx);
-    num.push_back(OPminusOAy);
-    normaliser2D(num);
-
-    double A2px = p.col - A2.col;
-    double A2py = p.lig - A2.lig;
-
-    denum.push_back(A2px);
-    denum.push_back(A2py);
-    normaliser2D(denum);
-
-    res1 = num[2] / denum[2];
-    res2 = num[3] / denum[3];
-    alpha = res1 / res2;
-
-    //Trouvons les coordonnées de p3D et D
 
     return pts3D;
 }
